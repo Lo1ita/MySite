@@ -1,0 +1,6 @@
+E:\project\NewWeb\WebModel\bin\Debug\WebModel.dll
+E:\project\NewWeb\WebModel\bin\Debug\WebModel.pdb
+E:\project\NewWeb\WebModel\obj\Debug\WebModel.csprojResolveAssemblyReference.cache
+E:\project\NewWeb\WebModel\obj\Debug\WebModel.csproj.CoreCompileInputs.cache
+E:\project\NewWeb\WebModel\obj\Debug\WebModel.dll
+E:\project\NewWeb\WebModel\obj\Debug\WebModel.pdb
