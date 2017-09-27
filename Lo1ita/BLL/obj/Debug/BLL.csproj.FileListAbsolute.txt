@@ -1,0 +1,8 @@
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\bin\Debug\BLL.dll
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\bin\Debug\BLL.pdb
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\bin\Debug\Model.dll
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\bin\Debug\Model.pdb
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\obj\Debug\BLL.csprojResolveAssemblyReference.cache
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\obj\Debug\BLL.dll
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\obj\Debug\BLL.pdb

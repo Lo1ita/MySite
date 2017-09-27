@@ -1,0 +1,6 @@
+E:\project\Demo\GitHub\MySite\Lo1ita\Model\bin\Debug\Model.dll
+E:\project\Demo\GitHub\MySite\Lo1ita\Model\bin\Debug\Model.pdb
+E:\project\Demo\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\project\Demo\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+E:\project\Demo\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.dll
+E:\project\Demo\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.pdb

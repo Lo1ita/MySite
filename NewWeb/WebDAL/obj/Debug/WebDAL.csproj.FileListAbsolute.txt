@@ -1,8 +1,0 @@
-E:\project\NewWeb\WebDAL\bin\Debug\WebDAL.dll
-E:\project\NewWeb\WebDAL\bin\Debug\WebDAL.pdb
-E:\project\NewWeb\WebDAL\bin\Debug\WebModel.dll
-E:\project\NewWeb\WebDAL\bin\Debug\WebModel.pdb
-E:\project\NewWeb\WebDAL\obj\Debug\WebDAL.csprojResolveAssemblyReference.cache
-E:\project\NewWeb\WebDAL\obj\Debug\WebDAL.csproj.CoreCompileInputs.cache
-E:\project\NewWeb\WebDAL\obj\Debug\WebDAL.dll
-E:\project\NewWeb\WebDAL\obj\Debug\WebDAL.pdb

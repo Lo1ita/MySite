@@ -1,8 +1,0 @@
-E:\project\NewWeb\WebBLL\bin\Debug\WebBLL.dll
-E:\project\NewWeb\WebBLL\bin\Debug\WebBLL.pdb
-E:\project\NewWeb\WebBLL\bin\Debug\WebModel.dll
-E:\project\NewWeb\WebBLL\bin\Debug\WebModel.pdb
-E:\project\NewWeb\WebBLL\obj\Debug\WebBLL.csprojResolveAssemblyReference.cache
-E:\project\NewWeb\WebBLL\obj\Debug\WebBLL.csproj.CoreCompileInputs.cache
-E:\project\NewWeb\WebBLL\obj\Debug\WebBLL.dll
-E:\project\NewWeb\WebBLL\obj\Debug\WebBLL.pdb
