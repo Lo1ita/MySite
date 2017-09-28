@@ -10,3 +10,16 @@ E:\project\Demo\GitHub\MySite\Lo1ita\Model\bin\Debug\EntityFramework.SqlServer.d
 E:\project\Demo\GitHub\MySite\Lo1ita\Model\bin\Debug\EntityFramework.xml
 E:\project\Demo\GitHub\MySite\Lo1ita\Model\bin\Debug\EntityFramework.SqlServer.xml
 E:\project\Demo\GitHub\MySite\Lo1ita\Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\Model.dll.config
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\Model.dll
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\Model.pdb
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\EntityFramework.dll
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\EntityFramework.SqlServer.dll
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\EntityFramework.xml
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\EntityFramework.SqlServer.xml
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\zh-Hans\EntityFramework.resources.dll
+E:\project\GitHub\MySite\Lo1ita\Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
+E:\project\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.csprojResolveAssemblyReference.cache
+E:\project\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
+E:\project\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.dll
+E:\project\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.pdb
