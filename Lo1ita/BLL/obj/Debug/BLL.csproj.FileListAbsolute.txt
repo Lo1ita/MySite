@@ -6,3 +6,7 @@ E:\project\Demo\GitHub\MySite\Lo1ita\BLL\obj\Debug\BLL.csprojResolveAssemblyRefe
 E:\project\Demo\GitHub\MySite\Lo1ita\BLL\obj\Debug\BLL.csproj.CoreCompileInputs.cache
 E:\project\Demo\GitHub\MySite\Lo1ita\BLL\obj\Debug\BLL.dll
 E:\project\Demo\GitHub\MySite\Lo1ita\BLL\obj\Debug\BLL.pdb
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\bin\Debug\EntityFramework.dll
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\bin\Debug\Model.dll.config
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\bin\Debug\EntityFramework.xml
+E:\project\Demo\GitHub\MySite\Lo1ita\BLL\bin\Debug\zh-Hans\EntityFramework.resources.dll
