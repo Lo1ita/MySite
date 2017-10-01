@@ -13,5 +13,9 @@ namespace Lo1ita.Controllers
         {
             return View();
         }
+        public ActionResult MainPage()
+        {
+            return View();
+        }
     }
 }
