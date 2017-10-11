@@ -1,0 +1,17 @@
+﻿.titleInput .Input {
+    height: 44px;
+    min-height: 44px;
+    border: 0;
+    width: 100%;
+    font-size: 32px;
+    line-height: 1.4;
+    font-weight: 700;
+    display: block;
+    outline: none;
+    box-shadow: none;
+    overflow: hidden;
+    font-family: inherit;
+    resize: none;
+    flex: 1;
+    background: transparent;
+}

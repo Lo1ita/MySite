@@ -1,0 +1,41 @@
+﻿@model Model.Article
+
+@{
+    Layout = "~/Views/Shared/_ArticleLayout.cshtml";
+    ViewBag.Title = "Create";
+}
+<link href="~/Content/Article.css" rel="stylesheet" />
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+       
+        <div class="titleInput">
+           <textarea rows="1" class="Input" id="Title" name="Title" placeholder="请输入标题"></textarea>
+            
+        </div>
+        <div id="editor">
+        </div>
+       
+       
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+<script src="~/Scripts/WangEditor/wangEditor.min.js"></script>
+<script type="text/javascript">
+    var E = window.wangEditor
+    var editor = new E('#editor')
+    // 或者 var editor = new E( document.getElementById('#editor') )
+    editor.create()
+</script>

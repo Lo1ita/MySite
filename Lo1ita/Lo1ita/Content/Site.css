@@ -23,37 +23,50 @@
 }
 /*头部内容Nav标签*/
 #navTop {
-    background:none;
+    background: none;
     width: 1170px;
     margin: 0 auto;
-    border-radius:0;
-    border:none;
+    border-radius: 0;
+    border: none;
 }
 /*内容Div*/
 #divContent {
     margin: 80px 0 0 0;
 }
+
 .RichContent-inner {
     margin-top: 9px;
     margin-bottom: -4px;
     overflow: hidden;
-    cursor:pointer;
 }
-    .RichContent-inner:hover {
-        color: #717171;
-    }
-    .ContentItem-more {
-        color: #175199;
-        height: auto;
-        padding: 0;
-        line-height: inherit;
-        background-color: transparent;
-        border: none;
-        border-radius: 0;
-    }
-.ContentItem-more:hover{
-    color: #9fadc7;
+/*阅读全文按钮*/
+.ContentItem-more {
+    color: #175199;
+    height: auto;
+    padding: 0;
+    line-height: inherit;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
 }
+
+    .ContentItem-more:hover {
+        color: #9fadc7;
+    }
+/*收起文章按钮*/
+.ContentItem-close {
+    color: #175199;
+    height: auto;
+    padding: 0;
+    line-height: inherit;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+    .ContentItem-close:hover {
+        color: #9fadc7;
+    }
 /*文章标题*/
 .ContentItem-title {
     font-size: 18px;
@@ -63,12 +76,24 @@
     margin-top: -4px;
     margin-bottom: -4px;
 }
+/*折叠的文本*/
+.FoldCotent {
+    margin-top: 9px;
+    margin-bottom: -4px;
+    overflow: hidden;
+    line-height: 1.67;
+    cursor: pointer;
+}
 
+    .FoldCotent:hover {
+        color: #717171;
+    }
+/*全部文本*/
 .RichContent {
     line-height: 1.67;
 }
 
 /*右侧部分*/
-#rightPart{
-    position:fixed;
+#rightPart {
+    position: fixed;
 }

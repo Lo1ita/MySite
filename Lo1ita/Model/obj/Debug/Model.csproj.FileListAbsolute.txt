@@ -23,3 +23,4 @@ E:\project\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.csprojResolveAssemblyRefer
 E:\project\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.csproj.CoreCompileInputs.cache
 E:\project\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.dll
 E:\project\GitHub\MySite\Lo1ita\Model\obj\Debug\Model.pdb
+E:\project\Demo\GitHub\MySite\Lo1ita\Model\bin\Debug\zh-Hans\EntityFramework.SqlServer.resources.dll
