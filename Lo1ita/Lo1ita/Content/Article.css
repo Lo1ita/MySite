@@ -15,3 +15,9 @@
     flex: 1;
     background: transparent;
 }
+
+.navbar-brand{
+    font-size:40px;
+    font-weight:700;
+    margin:0 20px;
+}

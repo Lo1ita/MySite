@@ -1,8 +1,29 @@
-﻿
-@{
-    ViewBag.Title = "_ArticleLayout";
-}
-
-<h2>_ArticleLayout</h2>
-
-@RenderBody()
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/Article.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="divTop" class="row clearfix">
+        <div class="col-md-12 column" style="padding:0">
+            <nav id="navTop" class="navbar navbar-default" role="navigation">
+                <div class="navbar-header">
+                   <a class="navbar-brand" href="/Home/MainPage">L</a>
+                </div>
+                
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+</body>
+</html>
