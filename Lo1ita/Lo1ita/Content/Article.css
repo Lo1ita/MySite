@@ -1,4 +1,7 @@
 ﻿/*标题栏*/
+.titleInput {
+    margin:16px 0;
+}
 .titleInput .Input {
     height: 44px;
     min-height: 44px;
@@ -15,6 +18,9 @@
     resize: none;
     flex: 1;
     background: transparent;
+}
+.Input::-webkit-input-placeholder {
+    color: #b3b3b3;
 }
 .navbar-default{
     background:none;
@@ -47,4 +53,14 @@
   .publishBtn :hover {
         background-color: rgba(13, 121, 209, .06);
     }
+
+  /*富文本菜单栏*/
+.toolbar {
+    border-top: 1px solid #e7e7e7;
+}
+/*富文本菜单项*/
+.w-e-toolbar .w-e-menu i {
+    color: #b3b3b3;
+    font-size: 16px;
+}
 

@@ -22,6 +22,9 @@
 <script src="~/Scripts/WangEditor/wangEditor.min.js"></script>
 <script type="text/javascript">
     var E = window.wangEditor
-    var editor = new E('#divTool','#divText')
+    var editor = new E('#divTool', '#divText')
+    editor.customConfig.onchange = function (html) {
+        console.log(html)
+    }
     editor.create()
 </script>
