@@ -1,4 +1,5 @@
-﻿.titleInput .Input {
+﻿/*标题栏*/
+.titleInput .Input {
     height: 44px;
     min-height: 44px;
     border: 0;
@@ -15,9 +16,35 @@
     flex: 1;
     background: transparent;
 }
-
-.navbar-brand{
-    font-size:40px;
-    font-weight:700;
-    margin:0 20px;
+.navbar-default{
+    background:none;
 }
+/*左侧logo*/
+.navbar-brand {
+    font-size: 40px;
+    font-weight: 700;
+    margin: 0 20px;
+}
+/*顶部 右侧菜单栏*/
+.navbar-right > li {
+    padding: 10px 0 0 0;
+    margin: 0 20px;
+}
+/*顶部下拉菜单*/
+.nav > li > a {
+    padding: 0 10px;
+}
+.nav > li > button {
+    width: 82px;
+    height: 32px;
+    line-height: 30px;
+    padding: 0;
+}
+.publishBtn{
+    border-color:#0080ff;
+    color:#0080ff;
+}
+  .publishBtn :hover {
+        background-color: rgba(13, 121, 209, .06);
+    }
+

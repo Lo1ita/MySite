@@ -14,15 +14,14 @@
            <textarea rows="1" class="Input" id="Title" name="Title" placeholder="请输入标题"></textarea>
             
         </div>
-        <div id="editor">
-        </div>
+        <div id="divTool" class="toolbar"></div>
+        <div id="divText" class="textArea"></div>
     </div>
 }
 
 <script src="~/Scripts/WangEditor/wangEditor.min.js"></script>
 <script type="text/javascript">
     var E = window.wangEditor
-    var editor = new E('#editor')
-    // 或者 var editor = new E( document.getElementById('#editor') )
+    var editor = new E('#divTool','#divText')
     editor.create()
 </script>
