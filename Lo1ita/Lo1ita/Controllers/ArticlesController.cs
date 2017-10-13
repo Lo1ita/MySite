@@ -46,14 +46,17 @@ namespace Lo1ita.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Details,UpdateData,CreatDate,Display,Author,CreaterGuid,Hits,Excerpt,Type")] Article article)
+        public ActionResult Create(Article article)
         {
-            if (ModelState.IsValid)
-            {
+            article.Author = "js";
+            article.CreatDate = DateTime.Now;
+            article.Title = article.Title == "" ? "无标题" : article.Title;
+            article.Display = 1;
+            
                 db.Articles.Add(article);
                 db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                
+            
 
             return View(article);
         }
