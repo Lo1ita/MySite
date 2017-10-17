@@ -6,13 +6,13 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using Model;
+using Lo1ita.Model;
 
 namespace Lo1ita.Controllers
 {
     public class ArticlesController : Controller
     {
-        private Web db = new Web();
+        private MyWebEntities db = new MyWebEntities();
 
         // GET: Articles
         public ActionResult Index()
@@ -46,17 +46,14 @@ namespace Lo1ita.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Article article)
+        public ActionResult Create([Bind(Include = "ID,Title,Details,UpdateData,CreatDate,Display,Author,CreaterGuid,Hits,Excerpt,Type")] Article article)
         {
-            article.Author = "js";
-            article.CreatDate = DateTime.Now;
-            article.Title = article.Title == "" ? "无标题" : article.Title;
-            article.Display = 1;
-            
+            if (ModelState.IsValid)
+            {
                 db.Articles.Add(article);
                 db.SaveChanges();
-                
-            
+                return RedirectToAction("Index");
+            }
 
             return View(article);
         }
