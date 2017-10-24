@@ -108,15 +108,15 @@
     <Content Include="Content\img\Logo_grey.png" />
     <Content Include="Content\Site.css" />
     <Content Include="Global.asax" />
-    <Content Include="Model\WebModel.Context.tt">
+    <Content Include="Model\MyModel.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>WebModel.Context.cs</LastGenOutput>
-      <DependentUpon>WebModel.edmx</DependentUpon>
+      <DependentUpon>MyModel.edmx</DependentUpon>
+      <LastGenOutput>MyModel.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="Model\WebModel.tt">
+    <Content Include="Model\MyModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>WebModel.edmx</DependentUpon>
-      <LastGenOutput>WebModel.cs</LastGenOutput>
+      <DependentUpon>MyModel.edmx</DependentUpon>
+      <LastGenOutput>MyModel.cs</LastGenOutput>
     </Content>
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -128,12 +128,12 @@
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.woff" />
     <Content Include="Content\font-awesome-4.7.0\fonts\fontawesome-webfont.woff2" />
     <Content Include="Content\font-awesome-4.7.0\fonts\FontAwesome.otf" />
-    <EntityDeploy Include="Model\WebModel.edmx">
+    <EntityDeploy Include="Model\MyModel.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>WebModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>MyModel.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <Content Include="Model\WebModel.edmx.diagram">
-      <DependentUpon>WebModel.edmx</DependentUpon>
+    <Content Include="Model\MyModel.edmx.diagram">
+      <DependentUpon>MyModel.edmx</DependentUpon>
     </Content>
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -149,33 +149,32 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="DAL\ArticlesContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Model\Article.cs">
-      <DependentUpon>WebModel.tt</DependentUpon>
+      <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Model\Attachment.cs">
-      <DependentUpon>WebModel.tt</DependentUpon>
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MyModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MyModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model\MyModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>MyModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Model\UserInfo.cs">
-      <DependentUpon>WebModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\WebModel.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebModel.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\WebModel.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Model\WebModel.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>WebModel.edmx</DependentUpon>
+      <DependentUpon>MyModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -202,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="DAL\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
