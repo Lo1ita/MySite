@@ -72,7 +72,7 @@
 
 .navbar-title {
     margin: 0 auto;
-    width: 1140px;
+    width: 1000px;
     -webkit-box-orient: horizontal;
     -webkit-box-direction: normal;
     -ms-flex-direction: row;
@@ -91,6 +91,9 @@
     -webkit-box-align: center;
     -ms-flex-align: center;
     align-items: center;
+    font-size: 16px;
+    position: absolute;
+    margin: 15px;
 }
 
 .WriteIndex-pageTitle {
@@ -104,3 +107,10 @@
     float: left;
     color: #b3b3b3;
 }
+/*title下拉菜单*/
+.dropdown-menu > li > a {
+    padding: 15px 20px;
+}
+    .container {
+        width: 1000px;
+    }

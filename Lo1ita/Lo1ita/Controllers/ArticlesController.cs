@@ -35,7 +35,7 @@ namespace Lo1ita.Controllers
             return View(article);
         }
 
-        // GET: Articles/Create
+        //写文章
         public ActionResult Create()
         {
             return View();
@@ -46,16 +46,30 @@ namespace Lo1ita.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,Details,UpdateData,CreatDate,Display,Author,CreaterGuid,Hits,Excerpt,Type")] Article article)
+        public ActionResult Create(Article article)
         {
-            if (ModelState.IsValid)
-            {
-                db.Articles.Add(article);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-
-            return View(article);
+            article.Author = "帅宝宝";
+            article.CreatDate = DateTime.Now;
+            article.Display = 1;
+            db.Articles.Add(article);
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
+        /// <summary>
+        /// 草稿箱
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Draft()
+        {
+            return View();
+        }
+        /// <summary>
+        /// 我的文章
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult MyArticles()
+        {
+            return View();
         }
 
         // GET: Articles/Edit/5
