@@ -17,12 +17,12 @@
             <nav id="navTop" class="navbar navbar-default" role="navigation">
 
                 <div class="navbar-header">
-                    <a style="color: #b3b3b3;" class="navbar-brand" href="/Home/index">L</a>
+                    <a style="color: #b3b3b3;" class="navbar-brand" href="/Home/MainPage">L</a>
                 </div>
                 <div class="navbar-title">
                     <div class="WriteIndex-pageTitleWrapper">
                         <div class="WriteIndex-pageTitle">写文章</div>
-                        <div class="WriteIndex-pageSubTitle">草稿自动保存</div>
+                        <div class="WriteIndex-pageSubTitle">@ViewBag.titleText</div>
                     </div>
                 </div>
                 <div class="collapse navbar-collapse">
@@ -34,10 +34,10 @@
                             <a style="color: #b3b3b3;" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i></a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <a href="#">草稿</a>
+                                    <a href="Draft">草稿</a>
                                 </li>
                                 <li>
-                                    <a href="#">我的文章</a>
+                                    <a href="MyArticles">我的文章</a>
                                 </li>
                             </ul>
                         </li>
@@ -50,5 +50,10 @@
     <div class="container">
         @RenderBody()
     </div>
+    <script>
+        $(function () {
+            $("[data-toggle='tooltip']").tooltip();
+        });
+    </script>
 </body>
 </html>

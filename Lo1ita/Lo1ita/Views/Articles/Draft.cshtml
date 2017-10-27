@@ -1,38 +1,43 @@
-﻿@{
+﻿@model IEnumerable<Lo1ita.Model.Article>
+@{
     Layout = "~/Views/Shared/_ArticleLayout.cshtml";
     ViewBag.Title = "草稿";
+    ViewBag.titleText= "草稿";
+
 }
-<div>
+<div class="Draft-list">
     <ul>
-        <li>
-            <div>
-                <a class="Drafts-link" href="#">无标题</a>
-            </div>
-            <div class="Drafts-meta">
-            <time class="Drafts-updated" data-title="2017 年 10 月 26 日星期四下午 09 点 49 分">46 分钟前</time>
-                <span class="Bull"></span><span class="Drafts-words">共 0 字</span><span class="Bull"></span>
-                <span class="Drafts-removeButton">删除</span>
-            </div>
-        </li>
-        <li>
-            <div>
-                <a class="Drafts-link" href="#">无标题</a>
-            </div>
-            <div class="Drafts-meta">
-                <time class="Drafts-updated" data-title="2017 年 10 月 26 日星期四下午 09 点 49 分">46 分钟前</time>
-                <span class="Bull"></span><span class="Drafts-words">共 0 字</span><span class="Bull"></span>
-                <span class="Drafts-removeButton">删除</span>
-            </div>
-        </li>
-        <li>
-            <div>
-                <a class="Drafts-link" href="#">无标题</a>
-            </div>
-            <div class="Drafts-meta">
-                <time class="Drafts-updated" data-title="2017 年 10 月 26 日星期四下午 09 点 49 分">46 分钟前</time>
-                <span class="Bull"></span><span class="Drafts-words">共 0 字</span><span class="Bull"></span>
-                <span class="Drafts-removeButton">删除</span>
-            </div>
-        </li>
+
+        @foreach (var item in Model)
+        {
+            <li class="Drafts-item">
+                <div class="Drafts-title">
+                    <a class="Drafts-link" href="Edit/@item.ID">@item.Title</a>
+                </div>
+                <div class="Drafts-meta">
+                    <time class="Drafts-updated" data-toggle="tooltip" data-placement="bottom" title="@item.UpdateDate.ToString()"><span class="intervslTime"></span>前</time>
+                    <span class="Bull"></span><span class="Drafts-words">共 @item.Textlength 字</span><span class="Bull"></span>
+                    <span onclick="DeleteArticle(@item.ID)" class="Drafts-removeButton">删除</span>
+                </div>
+            </li>
+        }
+       
     </ul>
 </div>
+<script>
+    $(function () {
+        //隐藏标题
+        $(".WriteIndex-pageTitle").hide();
+        //隐藏发布按钮
+        $("#btnPublish").hide();
+    })
+    //计算相隔时间
+    $(".intervslTime").each(function () {
+        var updatetime=$(this).parent()
+        $(this).text("san");
+    })
+    //删除文章
+    function DeleteArticle(ID) {
+
+    }
+</script>

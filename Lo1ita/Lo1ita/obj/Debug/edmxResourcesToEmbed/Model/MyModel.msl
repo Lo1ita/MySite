@@ -4,10 +4,12 @@
     <EntitySetMapping Name="Articles">
       <EntityTypeMapping TypeName="MyWebModel.Article">
         <MappingFragment StoreEntitySet="Article">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="Textlength" ColumnName="Textlength" />
+          <ScalarProperty Name="isDraft" ColumnName="isDraft" />
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Details" ColumnName="Details" />
-          <ScalarProperty Name="UpdateData" ColumnName="UpdateData" />
           <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
           <ScalarProperty Name="Display" ColumnName="Display" />
           <ScalarProperty Name="Author" ColumnName="Author" />

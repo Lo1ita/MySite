@@ -149,6 +149,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -187,13 +188,16 @@
     <Content Include="Scripts\jquery-3.2.1.min.map" />
     <Content Include="Views\Home\MainPage.cshtml" />
     <Content Include="Views\Shared\_ArticleLayout.cshtml" />
-    <Content Include="Views\Articles\Create.cshtml" />
+    <Content Include="Views\Articles\Edit.cshtml" />
     <Content Include="Views\Articles\Delete.cshtml" />
     <Content Include="Views\Articles\Details.cshtml" />
-    <Content Include="Views\Articles\Edit.cshtml" />
-    <Content Include="Views\Articles\Index.cshtml" />
     <Content Include="Views\Articles\MyArticles.cshtml" />
     <Content Include="Views\Articles\Draft.cshtml" />
+    <Content Include="Views\User\Create.cshtml" />
+    <Content Include="Views\User\Delete.cshtml" />
+    <Content Include="Views\User\Details.cshtml" />
+    <Content Include="Views\User\Edit.cshtml" />
+    <Content Include="Views\User\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

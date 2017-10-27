@@ -10,121 +10,107 @@ using Lo1ita.Model;
 
 namespace Lo1ita.Controllers
 {
-    public class ArticlesController : Controller
+    public class UserController : Controller
     {
         private MyWebEntities db = new MyWebEntities();
 
-      
+        // GET: User
+        public ActionResult Index()
+        {
+            return View(db.UserInfoes.ToList());
+        }
 
-        // GET: Articles/Details/5
+        // GET: User/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
-            if (article == null)
+            UserInfo userInfo = db.UserInfoes.Find(id);
+            if (userInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(article);
+            return View(userInfo);
         }
 
-        //写文章
+        // GET: User/Create
         public ActionResult Create()
         {
-            Article article = new Article();
-            return View("Edit", article);
+            return View();
         }
 
-        // POST: Articles/Create
+        // POST: User/Create
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult Create(Article article)
+        public ActionResult Create([Bind(Include = "ID,UserGuid,UserName,PassWord,Gender,Birthdate,CreatDate,UpdateDate")] UserInfo userInfo)
         {
-            article.Author = "帅宝宝";
-            article.CreatDate = DateTime.Now;
-            article.UpdateDate = DateTime.Now;
-            article.Display = 1;
-            db.Articles.Add(article);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                db.UserInfoes.Add(userInfo);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            return View(userInfo);
         }
+
+        // GET: User/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
-            if (article == null)
+            UserInfo userInfo = db.UserInfoes.Find(id);
+            if (userInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(article);
+            return View(userInfo);
         }
 
-        // POST: Articles/Edit/5
+        // POST: User/Edit/5
         // 为了防止“过多发布”攻击，请启用要绑定到的特定属性，有关 
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        [ValidateInput(false)]
-        public ActionResult Edit(Article article)
+        public ActionResult Edit([Bind(Include = "ID,UserGuid,UserName,PassWord,Gender,Birthdate,CreatDate,UpdateDate")] UserInfo userInfo)
         {
-            article.UpdateDate = DateTime.Now;
-                db.Entry(article).State = EntityState.Modified;
+            if (ModelState.IsValid)
+            {
+                db.Entry(userInfo).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
-        }
-        /// <summary>
-        /// 草稿箱
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult Draft()
-        {
-            return View(db.Articles.ToList());
-        }
-        /// <summary>
-        /// 我的文章
-        /// </summary>
-        /// <returns></returns>
-        public ActionResult MyArticles()
-        {
-            return View(db.Articles.ToList());
+            }
+            return View(userInfo);
         }
 
-      
-      
-
-      
-
-        // GET: Articles/Delete/5
+        // GET: User/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Article article = db.Articles.Find(id);
-            if (article == null)
+            UserInfo userInfo = db.UserInfoes.Find(id);
+            if (userInfo == null)
             {
                 return HttpNotFound();
             }
-            return View(article);
+            return View(userInfo);
         }
 
-        // POST: Articles/Delete/5
+        // POST: User/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Article article = db.Articles.Find(id);
-            db.Articles.Remove(article);
+            UserInfo userInfo = db.UserInfoes.Find(id);
+            db.UserInfoes.Remove(userInfo);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

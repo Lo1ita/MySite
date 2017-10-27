@@ -17,7 +17,7 @@ namespace Lo1ita.Model
         public int ID { get; set; }
         public string Title { get; set; }
         public string Details { get; set; }
-        public Nullable<System.DateTime> UpdateData { get; set; }
+        public Nullable<System.DateTime> UpdateDate { get; set; }
         public Nullable<System.DateTime> CreatDate { get; set; }
         public Nullable<int> Display { get; set; }
         public string Author { get; set; }
@@ -25,5 +25,7 @@ namespace Lo1ita.Model
         public Nullable<int> Hits { get; set; }
         public string Excerpt { get; set; }
         public Nullable<int> Type { get; set; }
+        public Nullable<int> isDraft { get; set; }
+        public Nullable<int> Textlength { get; set; }
     }
 }
