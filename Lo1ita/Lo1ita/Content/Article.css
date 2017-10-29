@@ -178,3 +178,38 @@ li {
     text-align: -webkit-match-parent;
 }
 
+/*文章详细页*/
+h1.title {
+    font-size: 30px;
+    color: #333;
+    line-height: 1.3;
+    position: relative;
+    font-weight: bold;
+}
+
+.stuff {
+    margin-top: 20px;
+    color: #666;
+    font-size: 13px;
+}
+
+    .stuff span {
+        display: inline-block;
+        margin-right: 20px;
+    }
+.content {
+    font-size: 14px;
+    line-height: 2;
+    color: #333;
+}
+
+    .content:before {
+        content: '';
+        height: 1px;
+        width: 100px;
+        background: #eee;
+        display: block;
+        margin: 30px auto 40px;
+    }
+
+

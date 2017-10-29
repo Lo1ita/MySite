@@ -14,9 +14,13 @@ namespace Lo1ita.Controllers
     {
         private MyWebEntities db = new MyWebEntities();
 
-      
 
-        // GET: Articles/Details/5
+
+        /// <summary>
+        /// 文章查看页面
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -24,6 +28,16 @@ namespace Lo1ita.Controllers
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Article article = db.Articles.Find(id);
+            //文章点击数
+            if (article.Hits == null)
+            {
+                article.Hits = 1;
+            }
+            else
+            {
+                article.Hits = article.Hits + 1;
+            }
+            db.SaveChanges();
             if (article == null)
             {
                 return HttpNotFound();
@@ -52,7 +66,7 @@ namespace Lo1ita.Controllers
             article.Display = 1;
             db.Articles.Add(article);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return RedirectToAction("MyArticles");
         }
         public ActionResult Edit(int? id)
         {
@@ -87,7 +101,8 @@ namespace Lo1ita.Controllers
         /// <returns></returns>
         public ActionResult Draft()
         {
-            return View(db.Articles.ToList());
+    
+            return View(db.Articles.ToList().OrderByDescending(r=>r.UpdateDate));
         }
         /// <summary>
         /// 我的文章
@@ -95,7 +110,7 @@ namespace Lo1ita.Controllers
         /// <returns></returns>
         public ActionResult MyArticles()
         {
-            return View(db.Articles.ToList());
+            return View(db.Articles.ToList().OrderByDescending(r => r.UpdateDate));
         }
 
       

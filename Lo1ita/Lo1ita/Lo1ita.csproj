@@ -113,6 +113,7 @@
       <DependentUpon>MyModel.edmx</DependentUpon>
       <LastGenOutput>MyModel.Context.cs</LastGenOutput>
     </Content>
+    <Content Include="Model\MyModel.edmx.sql" />
     <Content Include="Model\MyModel.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>MyModel.edmx</DependentUpon>
@@ -143,7 +144,9 @@
     <Content Include="Scripts\modernizr-2.8.3.js" />
     <Content Include="Scripts\WangEditor\wangEditor.js" />
     <Content Include="Scripts\WangEditor\wangEditor.min.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />

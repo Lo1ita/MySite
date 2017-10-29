@@ -2,27 +2,41 @@
 @{
     Layout = "~/Views/Shared/_ArticleLayout.cshtml";
     ViewBag.Title = "草稿";
-    ViewBag.titleText= "草稿";
+    ViewBag.titleText = "草稿";
 
 }
 <div class="Draft-list">
     <ul>
+        
+                        
+                        @if (Model.Count()!=0)
+                        {
+                            foreach (var item in Model)
+                            {
+                <li class="Drafts-item">
+                    <div class="Drafts-title">
+                        <a class="Drafts-link" href="Edit/@item.ID">@item.Title</a>
+                    </div>
+                    <div class="Drafts-meta">
+                        <time class="Drafts-updated" data-toggle="tooltip" data-placement="bottom" title="@item.UpdateDate.ToString()"><span class="intervslTime"></span>前</time>
+                        <span class="Bull"></span><span class="Drafts-words">共 @item.Textlength 字</span><span class="Bull"></span>
+                        <span onclick="DeleteArticle(@item.ID)" class="Drafts-removeButton">删除</span>
+                    </div>
+                </li>
+                }
+            }
+            else
+            {
+        <li class="Drafts-item">
+            <div class="Drafts-title">
+                <span class="Drafts-link">暂无草稿</span>
+            </div>
+        </li>
 
-        @foreach (var item in Model)
-        {
-            <li class="Drafts-item">
-                <div class="Drafts-title">
-                    <a class="Drafts-link" href="Edit/@item.ID">@item.Title</a>
-                </div>
-                <div class="Drafts-meta">
-                    <time class="Drafts-updated" data-toggle="tooltip" data-placement="bottom" title="@item.UpdateDate.ToString()"><span class="intervslTime"></span>前</time>
-                    <span class="Bull"></span><span class="Drafts-words">共 @item.Textlength 字</span><span class="Bull"></span>
-                    <span onclick="DeleteArticle(@item.ID)" class="Drafts-removeButton">删除</span>
-                </div>
-            </li>
-        }
-       
-    </ul>
+                }
+            
+
+</ul>
 </div>
 <script>
     $(function () {
@@ -33,8 +47,14 @@
     })
     //计算相隔时间
     $(".intervslTime").each(function () {
-        var updatetime=$(this).parent()
-        $(this).text("san");
+        var updatetime = $(this).parent().attr("title").split(" ");
+        var updateDate = updatetime[0].split("-");
+        var CurrentTime = new Date();
+        var uDate = new Date(updateDate[1] + '-' + updateDate[2] + '-' + updateDate[0]);
+        var CDate = CurrentTime.getMonth() + '-' + CurrentTime.getDate() + '-' + CurrentTime.getFullYear();
+        iDays=parseInt(Math.abs(CDate-uDate)/1000/60/60/24)
+
+        $(this).text(iDays);
     })
     //删除文章
     function DeleteArticle(ID) {

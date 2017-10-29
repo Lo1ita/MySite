@@ -2,14 +2,12 @@
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="MyWebModelStoreContainer" CdmEntityContainer="MyWebEntities">
     <EntitySetMapping Name="Articles">
-      <EntityTypeMapping TypeName="MyWebModel.Article">
-        <MappingFragment StoreEntitySet="Article">
-          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="Textlength" ColumnName="Textlength" />
-          <ScalarProperty Name="isDraft" ColumnName="isDraft" />
+      <EntityTypeMapping TypeName="IsTypeOf(MyWebModel.Article)">
+        <MappingFragment StoreEntitySet="Articles">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="Title" ColumnName="Title" />
           <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
           <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
           <ScalarProperty Name="Display" ColumnName="Display" />
           <ScalarProperty Name="Author" ColumnName="Author" />
@@ -17,12 +15,14 @@
           <ScalarProperty Name="Hits" ColumnName="Hits" />
           <ScalarProperty Name="Excerpt" ColumnName="Excerpt" />
           <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="isDraft" ColumnName="isDraft" />
+          <ScalarProperty Name="Textlength" ColumnName="Textlength" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="Attachments">
-      <EntityTypeMapping TypeName="MyWebModel.Attachment">
-        <MappingFragment StoreEntitySet="Attachment">
+      <EntityTypeMapping TypeName="IsTypeOf(MyWebModel.Attachment)">
+        <MappingFragment StoreEntitySet="Attachments">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="RefTableID" ColumnName="RefTableID" />
           <ScalarProperty Name="RefTableName" ColumnName="RefTableName" />
@@ -37,8 +37,8 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="UserInfoes">
-      <EntityTypeMapping TypeName="MyWebModel.UserInfo">
-        <MappingFragment StoreEntitySet="UserInfo">
+      <EntityTypeMapping TypeName="IsTypeOf(MyWebModel.UserInfo)">
+        <MappingFragment StoreEntitySet="UserInfoes">
           <ScalarProperty Name="ID" ColumnName="ID" />
           <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
           <ScalarProperty Name="UserName" ColumnName="UserName" />

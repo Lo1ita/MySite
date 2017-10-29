@@ -1,98 +1,26 @@
 ﻿@model Lo1ita.Model.Article
 
 @{
-    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_ArticleLayout.cshtml";
+    ViewBag.Title = Model.Title;
 }
-
-<h2>Details</h2>
-
 <div>
-    <h4>Article</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Details)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Details)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.UpdateDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UpdateDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreatDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreatDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Display)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Display)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Author)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Author)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreaterGuid)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreaterGuid)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Hits)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Hits)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Excerpt)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Excerpt)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Type)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Type)
-        </dd>
-
-    </dl>
+    <h1 class="title">@Model.Title</h1>
+    <div class="stuff">
+        <span>@Model.UpdateDate</span>
+        <span>阅读 @Model.Hits</span>
+        <span>字数 @Model.Textlength</span>
+    </div>
+    <div class="content">
+        @Html.Raw(Model.Details)
+    </div>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.ID }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+<script>
+    $(function () {
+        //隐藏标题
+        $(".WriteIndex-pageTitle").hide();
+        $(".WriteIndex-pageSubTitle").hide();
+        //隐藏发布按钮
+        $("#btnPublish").hide();
+    })
+</script>
