@@ -50,11 +50,14 @@
         var updatetime = $(this).parent().attr("title").split(" ");
         var updateDate = updatetime[0].split("-");
         var CurrentTime = new Date();
-        var uDate = new Date(updateDate[1] + '-' + updateDate[2] + '-' + updateDate[0]);
-        var CDate = CurrentTime.getMonth() + '-' + CurrentTime.getDate() + '-' + CurrentTime.getFullYear();
-        iDays=parseInt(Math.abs(CDate-uDate)/1000/60/60/24)
-
-        $(this).text(iDays);
+        var uDate =Date.parse(updateDate[1] + '-' + updateDate[2] + '-' + updateDate[0]);
+        var CDate = Date.parse((CurrentTime.getMonth() + 1) + '-' + CurrentTime.getDate() + '-' + CurrentTime.getFullYear());
+        //相隔天数
+        iDays = parseInt(Math.abs(CDate - uDate) / 86400000);
+        if (iDays > 0) {
+            $(this).text(iDays+"天");
+        }
+        
     })
     //删除文章
     function DeleteArticle(ID) {
