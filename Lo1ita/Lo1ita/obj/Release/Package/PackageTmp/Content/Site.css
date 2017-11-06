@@ -1,0 +1,109 @@
+﻿body {
+    font-family: Helvetica Neue,Helvetica,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Noto Sans CJK SC,WenQuanYi Micro Hei,Arial,sans-serif;
+    font-size: 15px;
+    color: #262626;
+    background: #f3f3f3;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+/*头部外层Div*/
+#divTop {
+    width: 100%;
+    position: fixed;
+    margin: 0;
+    background: #fff;
+    font-size: 15px;
+    min-width: 1032px;
+    overflow: hidden;
+    border-bottom: 1px solid rgba(30,35,42,.06);
+    -webkit-box-shadow: 0 1px 3px 0 rgba(0,34,77,.05);
+    box-shadow: 0 1px 3px 0 rgba(0,34,77,.05);
+    background-clip: content-box;
+    z-index: 100;
+}
+/*头部内容Nav标签*/
+#navTop {
+    background: none;
+    width: 1170px;
+    margin: 0 auto;
+    border-radius: 0;
+    border: none;
+}
+/*内容Div*/
+#divContent {
+    margin: 80px 0 0 0;
+}
+
+.RichContent-inner {
+    margin-top: 9px;
+    margin-bottom: -4px;
+    overflow: hidden;
+}
+/*阅读全文按钮*/
+.ContentItem-more {
+    color: #175199;
+    height: auto;
+    padding: 0;
+    line-height: inherit;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+    .ContentItem-more:hover {
+        color: #9fadc7;
+    }
+/*收起文章按钮*/
+.ContentItem-close {
+    color: #175199;
+    height: auto;
+    padding: 0;
+    line-height: inherit;
+    background-color: transparent;
+    border: none;
+    border-radius: 0;
+}
+
+    .ContentItem-close:hover {
+        color: #9fadc7;
+    }
+/*文章标题*/
+.ContentItem-title {
+    font-size: 18px;
+    font-weight: 700;
+    line-height: 1.6;
+    color: #1e1e1e;
+    margin-top: -4px;
+    margin-bottom: -4px;
+}
+/*折叠的文本*/
+.FoldCotent {
+    margin-top: 9px;
+    margin-bottom: -4px;
+    overflow: hidden;
+    line-height: 1.67;
+    cursor: pointer;
+}
+
+    .FoldCotent:hover {
+        color: #717171;
+    }
+/*全部文本*/
+.RichContent {
+    line-height: 1.67;
+}
+
+/*右侧部分*/
+#rightPart {
+    position: fixed;
+}
+
+/*右侧写文章按钮*/
+.editbtn{
+    font-size:16px;
+    padding:5px 40px;
+    color:#1e1e1e;
+}
+.editbtn:hover{
+    text-decoration:none;
+}

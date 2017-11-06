@@ -4,59 +4,60 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="MyWebModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2012" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-  <EntityContainer Name="MyWebModelStoreContainer">
-    <EntitySet Name="Articles" EntityType="MyWebModel.Store.Articles" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="Attachments" EntityType="MyWebModel.Store.Attachments" store:Type="Tables" Schema="dbo" />
-    <EntitySet Name="UserInfoes" EntityType="MyWebModel.Store.UserInfoes" store:Type="Tables" Schema="dbo" />
-  </EntityContainer>
-  <EntityType Name="Articles">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Title" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="Details" Type="varchar(max)" Nullable="true" />
-    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
-    <Property Name="CreatDate" Type="datetime" Nullable="true" />
-    <Property Name="Display" Type="int" Nullable="true" />
-    <Property Name="Author" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="CreaterGuid" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="Hits" Type="int" Nullable="true" />
-    <Property Name="Excerpt" Type="nvarchar" Nullable="true" MaxLength="250" />
-    <Property Name="Type" Type="int" Nullable="true" />
-    <Property Name="isDraft" Type="int" Nullable="true" />
-    <Property Name="Textlength" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="Attachments">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
-    <Property Name="RefTableID" Type="int" Nullable="true" />
-    <Property Name="RefTableName" Type="nvarchar" Nullable="true" MaxLength="100" />
-    <Property Name="Name" Type="nvarchar" Nullable="true" MaxLength="256" />
-    <Property Name="Extension" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="DisplayName" Type="nchar" Nullable="true" MaxLength="256" />
-    <Property Name="RelativePath" Type="nvarchar" Nullable="true" MaxLength="256" />
-    <Property Name="ContentType" Type="nvarchar" Nullable="true" MaxLength="100" />
-    <Property Name="CreatDate" Type="datetime" Nullable="true" />
-    <Property Name="IsDeleted" Type="int" Nullable="true" />
-  </EntityType>
-  <EntityType Name="UserInfoes">
-    <Key>
-      <PropertyRef Name="ID" />
-    </Key>
-    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="UserGuid" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="UserName" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="PassWord" Type="nvarchar" Nullable="true" MaxLength="50" />
-    <Property Name="Gender" Type="int" Nullable="true" />
-    <Property Name="Birthdate" Type="datetime" Nullable="true" />
-    <Property Name="CreatDate" Type="datetime" Nullable="true" />
-    <Property Name="UpdateDate" Type="datetime" Nullable="true" />
-  </EntityType>
-</Schema></edmx:StorageModels>
+      <Schema Namespace="MyWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Articles">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" />
+          <Property Name="Details" Type="varchar(max)" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="CreatDate" Type="datetime" />
+          <Property Name="Display" Type="int" />
+          <Property Name="Author" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreaterGuid" Type="nvarchar" MaxLength="50" />
+          <Property Name="Hits" Type="int" />
+          <Property Name="Excerpt" Type="nvarchar" MaxLength="250" />
+          <Property Name="Type" Type="int" />
+          <Property Name="isDraft" Type="int" />
+          <Property Name="Textlength" Type="int" />
+        </EntityType>
+        <EntityType Name="Attachments">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="RefTableID" Type="int" />
+          <Property Name="RefTableName" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" />
+          <Property Name="Extension" Type="nvarchar" MaxLength="50" />
+          <Property Name="DisplayName" Type="nchar" MaxLength="256" />
+          <Property Name="RelativePath" Type="nvarchar" MaxLength="256" />
+          <Property Name="ContentType" Type="nvarchar" MaxLength="100" />
+          <Property Name="CreatDate" Type="datetime" />
+          <Property Name="IsDeleted" Type="int" />
+        </EntityType>
+        <EntityType Name="UserInfoes">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserGuid" Type="nvarchar" MaxLength="50" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="int" />
+          <Property Name="Birthdate" Type="datetime" />
+          <Property Name="CreatDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" />
+        </EntityType>
+        <EntityContainer Name="MyWebModelStoreContainer">
+          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfoes" EntityType="Self.UserInfoes" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MyWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -67,7 +68,7 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="UpdateDate" Type="DateTime" Precision="3" Nullable="false" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="CreatDate" Type="DateTime" Precision="3" />
           <Property Name="Display" Type="Int32" />
           <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
@@ -115,59 +116,60 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-    <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-  <EntityContainerMapping StorageEntityContainer="MyWebModelStoreContainer" CdmEntityContainer="MyWebEntities">
-    <EntitySetMapping Name="Articles">
-      <EntityTypeMapping TypeName="IsTypeOf(MyWebModel.Article)">
-        <MappingFragment StoreEntitySet="Articles">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="Title" ColumnName="Title" />
-          <ScalarProperty Name="Details" ColumnName="Details" />
-          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-          <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
-          <ScalarProperty Name="Display" ColumnName="Display" />
-          <ScalarProperty Name="Author" ColumnName="Author" />
-          <ScalarProperty Name="CreaterGuid" ColumnName="CreaterGuid" />
-          <ScalarProperty Name="Hits" ColumnName="Hits" />
-          <ScalarProperty Name="Excerpt" ColumnName="Excerpt" />
-          <ScalarProperty Name="Type" ColumnName="Type" />
-          <ScalarProperty Name="isDraft" ColumnName="isDraft" />
-          <ScalarProperty Name="Textlength" ColumnName="Textlength" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="Attachments">
-      <EntityTypeMapping TypeName="IsTypeOf(MyWebModel.Attachment)">
-        <MappingFragment StoreEntitySet="Attachments">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="RefTableID" ColumnName="RefTableID" />
-          <ScalarProperty Name="RefTableName" ColumnName="RefTableName" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="Extension" ColumnName="Extension" />
-          <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-          <ScalarProperty Name="RelativePath" ColumnName="RelativePath" />
-          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-          <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
-          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-    <EntitySetMapping Name="UserInfoes">
-      <EntityTypeMapping TypeName="IsTypeOf(MyWebModel.UserInfo)">
-        <MappingFragment StoreEntitySet="UserInfoes">
-          <ScalarProperty Name="ID" ColumnName="ID" />
-          <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
-          <ScalarProperty Name="Gender" ColumnName="Gender" />
-          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
-          <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
-          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
-  </EntityContainerMapping>
-</Mapping></edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MyWebModelStoreContainer" CdmEntityContainer="MyWebEntities">
+          <EntitySetMapping Name="Articles">
+            <EntityTypeMapping TypeName="MyWebModel.Article">
+              <MappingFragment StoreEntitySet="Articles">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Details" ColumnName="Details" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
+                <ScalarProperty Name="Display" ColumnName="Display" />
+                <ScalarProperty Name="Author" ColumnName="Author" />
+                <ScalarProperty Name="CreaterGuid" ColumnName="CreaterGuid" />
+                <ScalarProperty Name="Hits" ColumnName="Hits" />
+                <ScalarProperty Name="Excerpt" ColumnName="Excerpt" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="isDraft" ColumnName="isDraft" />
+                <ScalarProperty Name="Textlength" ColumnName="Textlength" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Attachments">
+            <EntityTypeMapping TypeName="MyWebModel.Attachment">
+              <MappingFragment StoreEntitySet="Attachments">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="RefTableID" ColumnName="RefTableID" />
+                <ScalarProperty Name="RefTableName" ColumnName="RefTableName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Extension" ColumnName="Extension" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="RelativePath" ColumnName="RelativePath" />
+                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+                <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserInfoes">
+            <EntityTypeMapping TypeName="MyWebModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfoes">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+                <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
   <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
@@ -181,7 +183,7 @@
         <DesignerProperty Name="ValidateOnBuild" Value="true" />
         <DesignerProperty Name="EnablePluralization" Value="true" />
         <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
-        <DesignerProperty Name="UseLegacyProvider" Value="False" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
         <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
       </DesignerInfoPropertySet>
     </Options>

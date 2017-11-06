@@ -1,0 +1,26 @@
+﻿@model Lo1ita.Model.Article
+
+@{
+    Layout = "~/Views/Shared/_ArticleLayout.cshtml";
+    ViewBag.Title = Model.Title;
+}
+<div>
+    <h1 class="title">@Model.Title</h1>
+    <div class="stuff">
+        <span>@Model.UpdateDate</span>
+        <span>阅读 @Model.Hits</span>
+        <span>字数 @Model.Textlength</span>
+    </div>
+    <div class="content">
+        @Html.Raw(Model.Details)
+    </div>
+</div>
+<script>
+    $(function () {
+        //隐藏标题
+        $(".WriteIndex-pageTitle").hide();
+        $(".WriteIndex-pageSubTitle").hide();
+        //隐藏发布按钮
+        $("#btnPublish").hide();
+    })
+</script>

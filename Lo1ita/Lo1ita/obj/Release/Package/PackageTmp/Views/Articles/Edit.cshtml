@@ -1,0 +1,62 @@
+﻿@model Lo1ita.Model.Article
+
+@{
+    Layout = "~/Views/Shared/_ArticleLayout.cshtml";
+    ViewBag.Title = "写文章";
+    ViewBag.titleText = "草稿自动保存";
+}
+
+
+
+<div class="form-horizontal">
+    @using (Html.BeginForm())
+    {
+        
+        @Html.HiddenFor(model=>model.ID)
+        @Html.AntiForgeryToken()
+        <div class="titleInput">
+            <textarea rows="1" class="Input" id="Title" name="Title" placeholder="请输入标题">@Model.Title</textarea>
+            <input type="hidden" id="Details" name="Details" value="@Model.Details" />
+            <input type="hidden" id="Textlength" name="Textlength" value="@Model.Textlength" />
+        </div>
+    }
+    <div id="divTool" class="toolbar"></div>
+    <div id="divText" class="textArea"></div>
+
+</div>
+
+
+<script src="~/Scripts/WangEditor/wangEditor.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#btnCreate").hide();
+    })
+    var inputText = "";
+    var inputHtml = "";
+    var E = window.wangEditor
+    var editor = new E('#divTool', '#divText')
+    editor.customConfig.onchange = function (html) {
+        //编辑器中的文本
+        inputText = editor.txt.text();
+        inputHtml = editor.txt.html();
+        if ($("#Title").val().length > 0 && inputText.length > 0) {
+
+            $("#btnPublish").addClass("publishBtn");
+            $("#btnPublish").removeAttr("disabled");
+        }
+        else {
+            $("#btnPublish").removeClass("publishBtn");
+            $("#btnPublish").attr("disabled","disabled");
+        }
+    }
+    editor.create()
+    
+    if ($("#Details").val() != "") {
+        editor.txt.html($("#Details").val());
+    }
+    $("#btnPublish").click(function () {
+        $("#Textlength").val(inputText.length);
+        $("#Details").val(inputHtml);
+        $("form").submit();
+    })
+</script>

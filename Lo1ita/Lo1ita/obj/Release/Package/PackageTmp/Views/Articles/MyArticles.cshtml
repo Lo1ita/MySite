@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Lo1ita.Model.Article>
+@{
+    Layout = "~/Views/Shared/_ArticleLayout.cshtml";
+    ViewBag.Title = "我的文章";
+    ViewBag.titleText = "我的文章";
+
+}
+<div class="Draft-list">
+    <ul>
+
+        @foreach (var item in Model)
+        {
+            <li class="Drafts-item">
+                <div class="Drafts-title">
+                    <a class="Drafts-link" href="Details/@item.ID">@item.Title</a>
+                </div>
+                <div class="Drafts-meta">
+                    <time class="Drafts-updated" data-title="lastEditTime(@item.UpdateDate.ToString()">46 分钟前</time>
+                    <span class="Bull"></span><span class="Drafts-words">共 @item.Textlength 字</span><span class="Bull"></span>
+                    <span onclick="DeleteArticle(@item.ID)" class="Drafts-removeButton">删除</span>
+                </div>
+            </li>
+        }
+
+    </ul>
+</div>
+<script>
+    $(function () {
+        //隐藏标题
+        $(".WriteIndex-pageTitle").hide();
+        //隐藏发布按钮
+        $("#btnPublish").hide();
+    })
+
+    function lastEditTime(datetime) {
+        var editTime = new Date(datetime);
+        //2017 年 10 月 26 日星期四下午 09 点 49 分
+        return "sssas";
+    }
+    //删除文章
+    function DeleteArticle(ID) {
+
+    }
+</script>

@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=no">
+    <title>@ViewBag.Title</title>
+    <link href="~/Content/font-awesome-4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.8.3.js"></script>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <link href="~/Content/Article.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="divTop" class="row clearfix">
+        <div class="col-md-12 column" style="padding:0">
+            <nav id="navTop" class="navbar navbar-default" role="navigation">
+
+                <div class="navbar-header">
+                    <a style="color: #b3b3b3;" class="navbar-brand" href="/Home/MainPage">L</a>
+                </div>
+                <div class="navbar-title">
+                    <div class="WriteIndex-pageTitleWrapper">
+                        <div class="WriteIndex-pageTitle">写文章</div>
+                        <div class="WriteIndex-pageSubTitle">@ViewBag.titleText</div>
+                    </div>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        
+                        <li>
+                            
+    <button id="btnCreate" onclick="CreatArticle()" class="btn btn-default publishBtn">
+        写文章
+    </button>
+
+                            <button id="btnPublish" class="btn btn-default" disabled="disabled">发布</button>
+                        </li>
+                        <li class="dropdown">
+                            <a style="color: #b3b3b3;" href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-ellipsis-h fa-2x" aria-hidden="true"></i></a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="/Articles/Draft">草稿</a>
+                                </li>
+                                <li>
+                                    <a href="/Articles/MyArticles">我的文章</a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+
+            </nav>
+        </div>
+    </div>
+    <div class="container">
+        @RenderBody()
+    </div>
+    <script>
+        $(function () {
+            $("[data-toggle='tooltip']").tooltip();
+        });
+        function CreatArticle(){
+            window.location.href = "/Articles/Create";
+        }
+    </script>
+</body>
+</html>
