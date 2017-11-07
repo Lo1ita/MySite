@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿    <!DOCTYPE html>
 <html lang="zh-cn">
 <head>
    
@@ -32,9 +32,15 @@
                 <div class="weui-cell__bd">添加更多</div>
             </a>
             <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                <div class="weui-cell__hd"><label class="weui-label">Code</label></div>
                 <div class="weui-cell__bd">
-                    <input class="weui-input" type="text" placeholder="请输入姓名">
+                    <label class="weui-label" id="code"></label>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">Access_Token</label></div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label" id="Token"></label>
                 </div>
             </div>
         </div>
@@ -42,20 +48,27 @@
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script>
         $(function () {
-            redietUrl();
             var code = getCode('code');
-            alert(code);
+            $("#code").text(code);
+           
+            getToken();
         })
-        function redietUrl() {
-            $.ajax({
-                type: "GET",
-                url: 'https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxbecf26ac8d7671e8&redirect_uri=www.lo1ita.com/Wechat/index&response_type=code&scope=snsapi_base&agentid=1000005&state=STATE#wechat_redirect'
-            });
-        }
+       //获取浏览器地址栏中的Code
         function getCode(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
             var r = window.location.search.substr(1).match(reg); //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+        //获取access_token
+        function getToken() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'JSONP',
+                url: 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=wxbecf26ac8d7671e8&corpsecret=BZTgZuq1CTFO_PWLtlioFBY5ccl8oDrWw1Y9VZzKDak',
+                success: function (ret) {
+                    $("#Token").text(ret.access_token);
+                },
+            });
         }
     </script>
 </body></html>
