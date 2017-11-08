@@ -1,33 +1,72 @@
-﻿
-@{
-    ViewBag.Title = "Index";
-    Layout = null;
-}
-<link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui-for-work.css" />
-
-<div class="container">
-    <div class="weui-cells weui-cells_checkbox">
-        <label class="weui-cell weui-check__label" for="s11">
-            <div class="weui-cell__hd">
-                <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
-                <i class="weui-icon-checked"></i>
+﻿    <!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+   
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <title>WechatTest</title>
+    <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui-for-work.css" />
+</head>
+<body ontouchstart>
+    <div class="container">
+        <div class="weui-cells weui-cells_checkbox">
+            <label class="weui-cell weui-check__label" for="s11">
+                <div class="weui-cell__hd">
+                    <input type="checkbox" class="weui-check" name="checkbox1" id="s11" checked="checked">
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>小米</p>
+                </div>
+            </label>
+            <label class="weui-cell weui-check__label" for="s12">
+                <div class="weui-cell__hd">
+                    <input type="checkbox" name="checkbox1" class="weui-check" id="s12">
+                    <i class="weui-icon-checked"></i>
+                </div>
+                <div class="weui-cell__bd">
+                    <p>华为</p>
+                </div>
+            </label>
+            <a href="javascript:void(0);" class="weui-cell weui-cell_link">
+                <div class="weui-cell__bd">添加更多</div>
+            </a>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">UserTicket</label></div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label" id="UserTicket">@ViewBag.UserTicket</label>
+                </div>
             </div>
-            <div class="weui-cell__bd">
-                <p>standard is dealt for u.</p>
-            </div>
-        </label>
-        <label class="weui-cell weui-check__label" for="s12">
-            <div class="weui-cell__hd">
-                <input type="checkbox" name="checkbox1" class="weui-check" id="s12">
-                <i class="weui-icon-checked"></i>
-            </div>
-            <div class="weui-cell__bd">
-                <p>standard is dealicient for u.</p>
-            </div>
-        </label>
-        <a href="javascript:void(0);" class="weui-cell weui-cell_link">
-            <div class="weui-cell__bd">添加更多</div>
-        </a>
+        </div>
     </div>
-</div>
+    <script src="~/Scripts/jquery-3.2.1.min.js"></script>
+    <script>
+        $(function () {
+            var code = getCode('code');
+            $("#code").text(code);
+           
+            getToken();
+        })
+       //获取浏览器地址栏中的Code
+        function getCode(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
+            var r = window.location.search.substr(1).match(reg); //匹配目标参数
+            if (r != null) return unescape(r[2]); return null; //返回参数值
+        }
+        //获取access_token
+        function getToken() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'JSONP',
+                url: 'https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid=wxbecf26ac8d7671e8&corpsecret=BZTgZuq1CTFO_PWLtlioFBY5ccl8oDrWw1Y9VZzKDak',
+                success: function (ret) {
+                    $("#Token").text(ret.access_token);
+                },
+            });
+        }
+    </script>
+</body></html>
+
+
+
 
