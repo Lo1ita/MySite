@@ -75,9 +75,8 @@
         $(function () {
             var userticket = $("#UserTicket").text();
             var accesstoken = $("#AccessToken").text();
-            if (userticket != null && userticket != "") {
                 getUserInfo(userticket, accesstoken);
-            }
+            
         })
        //获取浏览器地址栏中的Code（弃用）
         function getCode(name) {
@@ -85,23 +84,7 @@
             var r = window.location.search.substr(1).match(reg); //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
         }
-        function getUserInfo(userticket, accesstoken) {
-            $.ajax({
-                type: 'POST',
-                url: 'https://qyapi.weixin.qq.com/cgi-bin/user/getuserdetail?access_token=' + accesstoken,
-                data: "user_ticket="+ userticket ,
-                dataType: 'JSONP',
-                async: false,
-                success: function (ret) {
-                    alert(11);
-                    alert(ret);
-                    $("#userid").text(ret.userid);
-                    $("#name").text(ret.name);
-                    $("#mobile").text(ret.mobile);
-                    $("#email").text(ret.email);
-                }
-            })
-        }
+     
 
         
     </script>

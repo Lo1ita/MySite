@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lo1ita.Model;
+using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -14,6 +15,11 @@ namespace Lo1ita.Common
        public  static string SECRET = ConfigurationManager.AppSettings["Secret"];
         public static string AgentId = ConfigurationManager.AppSettings["AgentId"];
         public static  string code = "";
+        /// <summary>
+        /// 获取用户Ticket
+        /// </summary>
+        /// <param name="type"></param>
+        /// <returns></returns>
         public static string GetUserTicket(string type)
         {
             string userticket = "";
@@ -44,7 +50,7 @@ namespace Lo1ita.Common
 
                 if (dict.TryGetValue("user_ticket", out userticket))//判断userticket是否存在
                 {
-                    SetCookie("user_ticket", dict["user_ticket"], 2);
+                    SetCookie("user_ticket", dict["user_ticket"], 5);
                 }
                 else  //access_Token 失效时重新发送。
                 {
@@ -71,7 +77,7 @@ namespace Lo1ita.Common
                 
                 if(HttpContext.Current.Request.Cookies["code"] ==null)  //判断是否是第二次进入
                 {
-                    SetCookie("code", HttpContext.Current.Request.QueryString["code"], 2);
+                    SetCookie("code", HttpContext.Current.Request.QueryString["code"], 5);
                     code = HttpContext.Current.Request.QueryString["code"];
                 }
                 else
@@ -105,6 +111,7 @@ namespace Lo1ita.Common
                 try
                 {
                     dataaccess = client.DownloadString(url);
+                    
                 }
                 catch (Exception e)
                 {
@@ -117,7 +124,7 @@ namespace Lo1ita.Common
 
                 if (obj.TryGetValue("access_token", out accessToken))//判断access_Token是否存在
                 {
-                    SetCookie("access_token", obj["access_token"], 2);
+                    SetCookie("access_token", obj["access_token"], 120);
                 }
                 else  //access_Token 失效时重新发送。
                 {
@@ -143,7 +150,7 @@ namespace Lo1ita.Common
             HttpCookie cookie = new HttpCookie(name);
             cookie.Name = name;
             cookie.Value = value;
-            cookie.Expires = DateTime.Now.AddHours(time);
+            cookie.Expires = DateTime.Now.AddMinutes(time);
             HttpContext.Current.Response.Cookies.Add(cookie);
         }
         /// <summary>
@@ -173,6 +180,14 @@ namespace Lo1ita.Common
             string locationhref = "http://" + SiteUrl + "/WeChat/" + TypeName;
             url = string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_userinfo&agentid={2}&state=STATE#wechat_redirect", CORPID, locationhref, AgentId);
             HttpContext.Current.Response.Redirect(url);
+        }
+
+        public static WeChatUser getUserInfo()
+        {
+            string url = "";
+            string postdata= @"{"user_ticket": "USER_TICKET"}"
+            HttpHelper.PostFunction(url,)
+            PostFunction()
         }
     }
 }
