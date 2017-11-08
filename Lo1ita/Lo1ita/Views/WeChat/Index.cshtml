@@ -37,17 +37,72 @@
                     <label class="weui-label" id="UserTicket">@ViewBag.UserTicket</label>
                 </div>
             </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">AccessToken</label></div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label" id="AccessToken">@ViewBag.AccessToken</label>
+                </div>
+            </div>
+            
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">id</label></div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label" id="userid"></label>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label" id="name"></label>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">手机</label></div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label" id="mobile"></label>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__hd"><label class="weui-label">邮箱</label></div>
+                <div class="weui-cell__bd">
+                    <label class="weui-label" id="email"></label>
+                </div>
+            </div>
         </div>
     </div>
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script>
-       
-       //获取浏览器地址栏中的Code
+        $(function () {
+            var userticket = $("#UserTicket").text();
+            var accesstoken = $("#AccessToken").text();
+            if (userticket != null && userticket != "") {
+                getUserInfo(userticket, accesstoken);
+            }
+        })
+       //获取浏览器地址栏中的Code（弃用）
         function getCode(name) {
             var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
             var r = window.location.search.substr(1).match(reg); //匹配目标参数
             if (r != null) return unescape(r[2]); return null; //返回参数值
         }
+        function getUserInfo(userticket, accesstoken) {
+            $.ajax({
+                type: 'POST',
+                url: 'https://qyapi.weixin.qq.com/cgi-bin/user/getuserdetail?access_token=' + accesstoken,
+                data: "user_ticket="+ userticket ,
+                dataType: 'JSONP',
+                async: false,
+                success: function (ret) {
+                    alert(11);
+                    alert(ret);
+                    $("#userid").text(ret.userid);
+                    $("#name").text(ret.name);
+                    $("#mobile").text(ret.mobile);
+                    $("#email").text(ret.email);
+                }
+            })
+        }
+
         
     </script>
 </body></html>

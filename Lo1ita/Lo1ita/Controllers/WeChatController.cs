@@ -14,6 +14,9 @@ namespace Lo1ita.Controllers
         {
 
             ViewBag.UserTicket = WechatHelper.GetUserTicket("Index");
+            ViewBag.AccessToken = WechatHelper.GetAccessToken();
+           
+
             return View();
         }
 
