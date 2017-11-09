@@ -1,8 +1,10 @@
 ﻿using Lo1ita.Model;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
+using System.Net.Http;
 using System.Web;
 using System.Web.Script.Serialization;
 
@@ -16,53 +18,37 @@ namespace Lo1ita.Common
         public static string AgentId = ConfigurationManager.AppSettings["AgentId"];
         public static  string code = "";
         /// <summary>
-        /// 获取用户Ticket
+        /// 获取用户ID
         /// </summary>
         /// <param name="type"></param>
         /// <returns></returns>
-        public static string GetUserTicket(string type)
+        public static string GetUserID(string type)
         {
-            string userticket = "";
-            if (HttpContext.Current.Request.Cookies["user_ticket"] == null)
+            string UserId = "";
+            if (HttpContext.Current.Request.Cookies["UserId"] == null)
             {
-                System.Net.ServicePointManager.SecurityProtocol = System.Net.SecurityProtocolType.Tls;
-                Dictionary<string, string> dict = new Dictionary<string, string>();
-                var client = new System.Net.WebClient();
-                var serializer = new JavaScriptSerializer();
+               
                 string code = GetCode(type);//获取code
                 string token = GetAccessToken(); //获取accessToken
                 string url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/user/getuserinfo?access_token={0}&code={1}", token, code);
-                client.Encoding = System.Text.Encoding.UTF8;
-                string userInfo = "";
                 try
                 {
-                    userInfo = client.DownloadString(url);
+                    string result = HttpHelper.GetResponse(url);
+                    JObject outputObj = JObject.Parse(result);
+                    UserId = outputObj["UserId"].ToString();
+                    if(!string.IsNullOrEmpty(UserId))
+                        SetCookie("UserId", UserId, 5);
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
-
-                    throw;
                 }
-
-                //获取字典
-                dict = serializer.Deserialize<Dictionary<string, string>>(userInfo);
-
-
-                if (dict.TryGetValue("user_ticket", out userticket))//判断userticket是否存在
-                {
-                    SetCookie("user_ticket", dict["user_ticket"], 5);
-                }
-                else  //access_Token 失效时重新发送。
-                {
-                    //存log方法
-                }
-
+             
             }
             else
             {
-                userticket = HttpContext.Current.Request.Cookies["user_ticket"].Value;
+                UserId = HttpContext.Current.Request.Cookies["UserId"].Value;
             }
-            return userticket;
+            return UserId;
         }
         /// <summary>
         /// 获取code代码
@@ -77,10 +63,11 @@ namespace Lo1ita.Common
                 
                 if(HttpContext.Current.Request.Cookies["code"] ==null)  //判断是否是第二次进入
                 {
+                    //将code存到cookies,时间为5分钟
                     SetCookie("code", HttpContext.Current.Request.QueryString["code"], 5);
                     code = HttpContext.Current.Request.QueryString["code"];
                 }
-                else
+                else   //如果code没有获取成功，重新拉去一遍
                 {
                     delCookies("code");   //删除cookies
                     CodeURL(TypeName); //code重新跳转URL
@@ -102,35 +89,22 @@ namespace Lo1ita.Common
             string accessToken = "";
             if (HttpContext.Current.Request.Cookies["access_token"] == null)
             {
-                Dictionary<string, string> obj = new Dictionary<string, string>();
-                var client = new System.Net.WebClient();
-                var serializer = new JavaScriptSerializer();
+               
                 string url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}", CORPID, SECRET);
-                client.Encoding = System.Text.Encoding.UTF8;
-                string dataaccess = "";
                 try
                 {
-                    dataaccess = client.DownloadString(url);
-                    
+                    string result = HttpHelper.GetResponse(url);
+                    JObject outputObj = JObject.Parse(result);
+                    accessToken = outputObj["access_token"].ToString();
+                    if(!string.IsNullOrEmpty(accessToken))
+                        SetCookie("access_token", accessToken, 120);
                 }
                 catch (Exception e)
                 {
-                    // 存log方法
 
+                   
                 }
-                //获取字典
-                obj = serializer.Deserialize<Dictionary<string, string>>(dataaccess);
-                
-
-                if (obj.TryGetValue("access_token", out accessToken))//判断access_Token是否存在
-                {
-                    SetCookie("access_token", obj["access_token"], 120);
-                }
-                else  //access_Token 失效时重新发送。
-                {
-                    //存log方法
-                }
-                
+              
             }
             else
             {
@@ -182,12 +156,46 @@ namespace Lo1ita.Common
             HttpContext.Current.Response.Redirect(url);
         }
 
-        public static WeChatUser getUserInfo()
+        public static WeChatUser getUserInfo(string userid,string accesstoken)
         {
-            string url = "";
-            string postdata= @"{"user_ticket": "USER_TICKET"}"
-            HttpHelper.PostFunction(url,)
-            PostFunction()
+            string url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token={0}&userid={1}", accesstoken,userid);
+            WeChatUser weChatUser = new WeChatUser();
+            try
+            {
+                string result = HttpHelper.GetResponse(url);
+                JObject outputObj = JObject.Parse(result);
+                
+                if (outputObj != null)
+                {
+                    weChatUser.avatar = outputObj["avatar"].ToString();
+                    weChatUser.department = outputObj["department"].ToString();
+                    weChatUser.email = outputObj["email"].ToString();
+
+                    weChatUser.gender = Convert.ToInt32(outputObj["gender"]);
+
+                    weChatUser.mobile = outputObj["mobile"].ToString();
+                    weChatUser.name = outputObj["name"].ToString();
+
+                    weChatUser.position = outputObj["position"].ToString();
+
+                    weChatUser.userid = outputObj["userid"].ToString();
+                }
+                else
+                {
+                    throw new Exception("你还不是本企业员工!");
+                }
+              
+               
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+           
+           
+            return weChatUser;
+
         }
     }
 }

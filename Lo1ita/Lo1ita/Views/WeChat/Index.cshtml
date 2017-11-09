@@ -3,6 +3,7 @@
 <head>
    
     <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no, email=no" />
     <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
     <title>WechatTest</title>
     <link rel="stylesheet" href="https://res.wx.qq.com/open/libs/weui/1.1.2/weui-for-work.css" />
@@ -28,66 +29,47 @@
                     <p>华为</p>
                 </div>
             </label>
-            <a href="javascript:void(0);" class="weui-cell weui-cell_link">
-                <div class="weui-cell__bd">添加更多</div>
-            </a>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">UserTicket</label></div>
-                <div class="weui-cell__bd">
-                    <label class="weui-label" id="UserTicket">@ViewBag.UserTicket</label>
+            <label class="weui-cell weui-check__label" for="s13">
+                <div class="weui-cell__hd">
+                    <input type="checkbox" name="checkbox1" class="weui-check" id="s13">
+                    <i class="weui-icon-checked"></i>
                 </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">AccessToken</label></div>
                 <div class="weui-cell__bd">
-                    <label class="weui-label" id="AccessToken">@ViewBag.AccessToken</label>
+                    <p>锤子</p>
                 </div>
-            </div>
-            
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">id</label></div>
-                <div class="weui-cell__bd">
-                    <label class="weui-label" id="userid"></label>
+            </label>
+            <label class="weui-cell weui-check__label" for="s14">
+                <div class="weui-cell__hd">
+                    <input type="checkbox" name="checkbox1" class="weui-check" id="s14">
+                    <i class="weui-icon-checked"></i>
                 </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">姓名</label></div>
                 <div class="weui-cell__bd">
-                    <label class="weui-label" id="name"></label>
+                    <p>魅族</p>
                 </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">手机</label></div>
-                <div class="weui-cell__bd">
-                    <label class="weui-label" id="mobile"></label>
+            </label>
+            <label class="weui-cell weui-check__label" for="s15">
+                <div class="weui-cell__hd">
+                    <input type="checkbox" name="checkbox1" class="weui-check" id="s15">
+                    <i class="weui-icon-checked"></i>
                 </div>
-            </div>
-            <div class="weui-cell">
-                <div class="weui-cell__hd"><label class="weui-label">邮箱</label></div>
                 <div class="weui-cell__bd">
-                    <label class="weui-label" id="email"></label>
+                    <p>乐视</p>
+                </div>
+            </label>
+            <a href="javascript:;" class="weui-btn weui-btn_primary">投 票</a>
+            <div class="weui-cell" style="position:fixed;bottom:10px;width:100%">
+                <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
+                    <img src="@ViewBag.UserInfo.avatar" style="width: 50px;display: block">
+                </div>
+                <div class="weui-cell__bd">
+                    <p>@ViewBag.UserInfo.name</p>
+                    <p style="font-size: 13px;color: #888888;">@ViewBag.UserInfo.department   @ViewBag.UserInfo.mobile</p>
                 </div>
             </div>
         </div>
     </div>
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
-    <script>
-        $(function () {
-            var userticket = $("#UserTicket").text();
-            var accesstoken = $("#AccessToken").text();
-                getUserInfo(userticket, accesstoken);
-            
-        })
-       //获取浏览器地址栏中的Code（弃用）
-        function getCode(name) {
-            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)"); //构造一个含有目标参数的正则表达式对象
-            var r = window.location.search.substr(1).match(reg); //匹配目标参数
-            if (r != null) return unescape(r[2]); return null; //返回参数值
-        }
-     
-
-        
-    </script>
+  
 </body></html>
 
 
