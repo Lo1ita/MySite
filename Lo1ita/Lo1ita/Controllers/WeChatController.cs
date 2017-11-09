@@ -13,12 +13,9 @@ namespace Lo1ita.Controllers
         // GET: WeChat
         public ActionResult Index()
         {
-            string UserTicket = WechatHelper.GetUserID("Index");
-            string AccessToken = WechatHelper.GetAccessToken();
-            WeChatUser UserInfo = WechatHelper.getUserInfo(UserTicket, AccessToken);
+            WeChatUser UserInfo = WechatHelper.getUserInfo();
             //WeChatUser UserInfo = new WeChatUser();
             ViewBag.UserInfo = UserInfo;
-          
             return View();
         }
 

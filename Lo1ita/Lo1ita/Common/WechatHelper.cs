@@ -102,7 +102,7 @@ namespace Lo1ita.Common
                 catch (Exception e)
                 {
 
-                   
+                    
                 }
               
             }
@@ -156,8 +156,10 @@ namespace Lo1ita.Common
             HttpContext.Current.Response.Redirect(url);
         }
 
-        public static WeChatUser getUserInfo(string userid,string accesstoken)
+        public static WeChatUser getUserInfo()
         {
+            string userid = WechatHelper.GetUserID("Index");
+            string accesstoken = WechatHelper.GetAccessToken();
             string url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token={0}&userid={1}", accesstoken,userid);
             WeChatUser weChatUser = new WeChatUser();
             try
