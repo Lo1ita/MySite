@@ -58,13 +58,21 @@
                 </div>
             </label>
             <a href="javascript:;" class="weui-btn weui-btn_primary">投 票</a>
-           
+           <div>测试数据： @ViewBag.test</div>
             <div class="weui-cell" style="position:fixed;bottom:10px;width:100%">
                 <div class="weui-cell__hd" style="position: relative;margin-right: 10px;">
                     <img src="@ViewBag.UserInfo.avatar" style="width: 50px;display: block">
                 </div>
                 <div class="weui-cell__bd">
-                    <p>@ViewBag.UserInfo.name</p>
+                    @if (!string.IsNullOrEmpty(ViewBag.UserInfo.name))
+                    {
+                        <p>@ViewBag.UserInfo.name</p>
+                    }
+                    else
+                    {
+                        <p style="color:#888888">未能获取用户信息，请到企业微信客户端打开</p>
+                    }
+
                     <p style="font-size: 13px;color: #888888;">@ViewBag.UserInfo.department   @ViewBag.UserInfo.mobile</p>
                 </div>
             </div>

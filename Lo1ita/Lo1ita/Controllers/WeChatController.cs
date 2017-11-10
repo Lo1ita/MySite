@@ -16,6 +16,7 @@ namespace Lo1ita.Controllers
             WeChatUser UserInfo = WechatHelper.getUserInfo();
             //WeChatUser UserInfo = new WeChatUser();
             ViewBag.UserInfo = UserInfo;
+            ViewBag.test = "暂无数据";
             return View();
         }
 

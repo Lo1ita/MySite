@@ -12,11 +12,11 @@ namespace Lo1ita.Common
 {
     public class WechatHelper
     {
-        public static string SiteUrl= ConfigurationManager.AppSettings["SiteUrl"];
-        public  static string CORPID = ConfigurationManager.AppSettings["CorpID"];
-       public  static string SECRET = ConfigurationManager.AppSettings["Secret"];
+        public static string SiteUrl = ConfigurationManager.AppSettings["SiteUrl"];
+        public static string CORPID = ConfigurationManager.AppSettings["CorpID"];
+        public static string SECRET = ConfigurationManager.AppSettings["Secret"];
         public static string AgentId = ConfigurationManager.AppSettings["AgentId"];
-        public static  string code = "";
+        public static string code = "";
         /// <summary>
         /// 获取用户ID
         /// </summary>
@@ -34,15 +34,17 @@ namespace Lo1ita.Common
                 try
                 {
                     string result = HttpHelper.GetResponse(url);
+                    
                     JObject outputObj = JObject.Parse(result);
                     UserId = outputObj["UserId"].ToString();
-                    if(!string.IsNullOrEmpty(UserId))
+                    if (!string.IsNullOrEmpty(UserId))
                         SetCookie("UserId", UserId, 5);
                 }
                 catch (Exception e)
                 {
+                    //throw new Exception(test);
                 }
-             
+
             }
             else
             {
@@ -57,19 +59,16 @@ namespace Lo1ita.Common
         /// <returns></returns>
         public static string GetCode(string TypeName)
         {
-            
+
             if (HttpContext.Current.Request.QueryString["code"] != null)  //判断code是否存在
             {
-                
-                if(HttpContext.Current.Request.Cookies["code"] ==null)  //判断是否是第二次进入
+
+                if (HttpContext.Current.Request.Cookies["code"] == null)  //判断是否是第二次进入
                 {
-                    //将code存到cookies,时间为5分钟
-                    SetCookie("code", HttpContext.Current.Request.QueryString["code"], 5);
                     code = HttpContext.Current.Request.QueryString["code"];
                 }
                 else   //如果code没有获取成功，重新拉去一遍
                 {
-                    delCookies("code");   //删除cookies
                     CodeURL(TypeName); //code重新跳转URL
                 }
 
@@ -89,26 +88,26 @@ namespace Lo1ita.Common
             string accessToken = "";
             if (HttpContext.Current.Request.Cookies["access_token"] == null)
             {
-               
+
                 string url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/gettoken?corpid={0}&corpsecret={1}", CORPID, SECRET);
                 try
                 {
                     string result = HttpHelper.GetResponse(url);
                     JObject outputObj = JObject.Parse(result);
                     accessToken = outputObj["access_token"].ToString();
-                    if(!string.IsNullOrEmpty(accessToken))
+                    if (!string.IsNullOrEmpty(accessToken))
                         SetCookie("access_token", accessToken, 120);
                 }
                 catch (Exception e)
                 {
 
-                    
+
                 }
-              
+
             }
             else
             {
-                accessToken= HttpContext.Current.Request.Cookies["access_token"].Value;
+                accessToken = HttpContext.Current.Request.Cookies["access_token"].Value;
             }
             return accessToken;
 
@@ -119,7 +118,7 @@ namespace Lo1ita.Common
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <param name="time"></param>
-        public static void SetCookie(string name,string value,int time)
+        public static void SetCookie(string name, string value, int time)
         {
             HttpCookie cookie = new HttpCookie(name);
             cookie.Name = name;
@@ -131,9 +130,9 @@ namespace Lo1ita.Common
         /// 删除cookies
         /// </summary>
         /// <param name="name"></param>
-     public static void delCookies(string name)
+        public static void delCookies(string name)
         {
-            foreach(string cookiename in HttpContext.Current.Request.Cookies.AllKeys)
+            foreach (string cookiename in HttpContext.Current.Request.Cookies.AllKeys)
             {
                 HttpCookie cookie = HttpContext.Current.Request.Cookies[name];
                 if (cookie != null)
@@ -155,22 +154,26 @@ namespace Lo1ita.Common
             url = string.Format("https://open.weixin.qq.com/connect/oauth2/authorize?appid={0}&redirect_uri={1}&response_type=code&scope=snsapi_userinfo&agentid={2}&state=STATE#wechat_redirect", CORPID, locationhref, AgentId);
             HttpContext.Current.Response.Redirect(url);
         }
-
+        /// <summary>
+        /// 通过userid和accessToken获取用户信息
+        /// </summary>
+        /// <returns></returns>
         public static WeChatUser getUserInfo()
         {
-            string userid = WechatHelper.GetUserID("Index");
-            string accesstoken = WechatHelper.GetAccessToken();
-            string url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token={0}&userid={1}", accesstoken,userid);
+            string userid = GetUserID("Index");
+            string accesstoken = GetAccessToken();
+            string url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/user/get?access_token={0}&userid={1}", accesstoken, userid);
             WeChatUser weChatUser = new WeChatUser();
             try
             {
                 string result = HttpHelper.GetResponse(url);
                 JObject outputObj = JObject.Parse(result);
-                
+
                 if (outputObj != null)
                 {
                     weChatUser.avatar = outputObj["avatar"].ToString();
-                    weChatUser.department = outputObj["department"].ToString();
+                    string deptID = outputObj["department"][0].ToString();
+                    weChatUser.department = GetDepartment(deptID);
                     weChatUser.email = outputObj["email"].ToString();
 
                     weChatUser.gender = Convert.ToInt32(outputObj["gender"]);
@@ -182,22 +185,31 @@ namespace Lo1ita.Common
 
                     weChatUser.userid = outputObj["userid"].ToString();
                 }
-                else
-                {
-                    throw new Exception("你还不是本企业员工!");
-                }
-              
-               
             }
             catch (Exception e)
             {
 
-                throw e;
+               // throw new Exception(userid);
             }
-           
-           
+
+
             return weChatUser;
 
+        }
+        /// <summary>
+        /// 根据部门ID获取部门信息
+        /// </summary>
+        /// <param name="deptID"></param>
+        /// <returns></returns>
+        public static string GetDepartment(string deptID)
+        {
+            string accesstoken = GetAccessToken();
+
+            string url = string.Format("https://qyapi.weixin.qq.com/cgi-bin/department/list?access_token={0}&id={1}", accesstoken, deptID);
+
+            string result = HttpHelper.GetResponse(url);
+            JObject outputObj = JObject.Parse(result);
+            return outputObj["department"][0]["name"].ToString();
         }
     }
 }
