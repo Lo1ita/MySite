@@ -13,10 +13,10 @@ namespace Lo1ita.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class MyWebEntities : DbContext
+    public partial class web_dbEntities : DbContext
     {
-        public MyWebEntities()
-            : base("name=MyWebEntities")
+        public web_dbEntities()
+            : base("name=web_dbEntities")
         {
         }
     
@@ -26,7 +26,6 @@ namespace Lo1ita.Model
         }
     
         public virtual DbSet<Article> Articles { get; set; }
-        public virtual DbSet<Attachment> Attachments { get; set; }
         public virtual DbSet<UserInfo> UserInfoes { get; set; }
     }
 }

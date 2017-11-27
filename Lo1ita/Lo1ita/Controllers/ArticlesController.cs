@@ -12,7 +12,7 @@ namespace Lo1ita.Controllers
 {
     public class ArticlesController : Controller
     {
-        private MyWebEntities db = new MyWebEntities();
+        private web_dbEntities db = new web_dbEntities();
 
 
 
@@ -61,7 +61,7 @@ namespace Lo1ita.Controllers
         public ActionResult Create(Article article)
         {
             article.Author = "帅宝宝";
-            article.CreatDate = DateTime.Now;
+            article.CreateDate = DateTime.Now;
             article.UpdateDate = DateTime.Now;
             article.Display = 1;
             db.Articles.Add(article);

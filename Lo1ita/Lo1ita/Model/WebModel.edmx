@@ -4,41 +4,27 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MyWebModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityType Name="Articles">
+      <Schema Namespace="web_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Article">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
           <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Title" Type="nvarchar" MaxLength="50" />
-          <Property Name="Details" Type="varchar(max)" />
-          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
-          <Property Name="CreatDate" Type="datetime" />
+          <Property Name="Details" Type="text" />
+          <Property Name="UpdateDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="Display" Type="int" />
           <Property Name="Author" Type="nvarchar" MaxLength="50" />
-          <Property Name="CreaterGuid" Type="nvarchar" MaxLength="50" />
+          <Property Name="CreatorGuid" Type="nvarchar" MaxLength="50" />
           <Property Name="Hits" Type="int" />
-          <Property Name="Excerpt" Type="nvarchar" MaxLength="250" />
           <Property Name="Type" Type="int" />
           <Property Name="isDraft" Type="int" />
           <Property Name="Textlength" Type="int" />
         </EntityType>
-        <EntityType Name="Attachments">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="int" Nullable="false" />
-          <Property Name="RefTableID" Type="int" />
-          <Property Name="RefTableName" Type="nvarchar" MaxLength="100" />
-          <Property Name="Name" Type="nvarchar" MaxLength="256" />
-          <Property Name="Extension" Type="nvarchar" MaxLength="50" />
-          <Property Name="DisplayName" Type="nchar" MaxLength="256" />
-          <Property Name="RelativePath" Type="nvarchar" MaxLength="256" />
-          <Property Name="ContentType" Type="nvarchar" MaxLength="100" />
-          <Property Name="CreatDate" Type="datetime" />
-          <Property Name="IsDeleted" Type="int" />
-        </EntityType>
-        <EntityType Name="UserInfoes">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“bds315550368_db.dbo.UserInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="UserInfo">
           <Key>
             <PropertyRef Name="ID" />
           </Key>
@@ -48,19 +34,29 @@
           <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
           <Property Name="Gender" Type="int" />
           <Property Name="Birthdate" Type="datetime" />
-          <Property Name="CreatDate" Type="datetime" />
+          <Property Name="CreateDate" Type="datetime" />
           <Property Name="UpdateDate" Type="datetime" />
         </EntityType>
-        <EntityContainer Name="MyWebModelStoreContainer">
-          <EntitySet Name="Articles" EntityType="Self.Articles" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Attachments" EntityType="Self.Attachments" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="UserInfoes" EntityType="Self.UserInfoes" Schema="dbo" store:Type="Tables" />
+        <EntityContainer Name="web_dbModelStoreContainer">
+          <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserInfo" EntityType="Self.UserInfo" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [UserInfo].[ID] AS [ID], 
+    [UserInfo].[UserGuid] AS [UserGuid], 
+    [UserInfo].[UserName] AS [UserName], 
+    [UserInfo].[PassWord] AS [PassWord], 
+    [UserInfo].[Gender] AS [Gender], 
+    [UserInfo].[Birthdate] AS [Birthdate], 
+    [UserInfo].[CreateDate] AS [CreateDate], 
+    [UserInfo].[UpdateDate] AS [UpdateDate]
+    FROM [dbo].[UserInfo] AS [UserInfo]</DefiningQuery>
+          </EntitySet>
         </EntityContainer>
       </Schema>
     </edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="MyWebModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="web_dbModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
         <EntityType Name="Article">
           <Key>
             <PropertyRef Name="ID" />
@@ -68,31 +64,15 @@
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Details" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
-          <Property Name="CreatDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="Display" Type="Int32" />
           <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CreaterGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CreatorGuid" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Hits" Type="Int32" />
-          <Property Name="Excerpt" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
           <Property Name="Type" Type="Int32" />
           <Property Name="isDraft" Type="Int32" />
           <Property Name="Textlength" Type="Int32" />
-        </EntityType>
-        <EntityType Name="Attachment">
-          <Key>
-            <PropertyRef Name="ID" />
-          </Key>
-          <Property Name="ID" Type="Int32" Nullable="false" />
-          <Property Name="RefTableID" Type="Int32" />
-          <Property Name="RefTableName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="Name" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="Extension" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="DisplayName" Type="String" MaxLength="256" FixedLength="true" Unicode="true" />
-          <Property Name="RelativePath" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
-          <Property Name="ContentType" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <Property Name="CreatDate" Type="DateTime" Precision="3" />
-          <Property Name="IsDeleted" Type="Int32" />
         </EntityType>
         <EntityType Name="UserInfo">
           <Key>
@@ -104,12 +84,11 @@
           <Property Name="PassWord" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Gender" Type="Int32" />
           <Property Name="Birthdate" Type="DateTime" Precision="3" />
-          <Property Name="CreatDate" Type="DateTime" Precision="3" />
+          <Property Name="CreateDate" Type="DateTime" Precision="3" />
           <Property Name="UpdateDate" Type="DateTime" Precision="3" />
         </EntityType>
-        <EntityContainer Name="MyWebEntities" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="web_dbEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Articles" EntityType="Self.Article" />
-          <EntitySet Name="Attachments" EntityType="Self.Attachment" />
           <EntitySet Name="UserInfoes" EntityType="Self.UserInfo" />
         </EntityContainer>
       </Schema>
@@ -117,52 +96,35 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="MyWebModelStoreContainer" CdmEntityContainer="MyWebEntities">
+        <EntityContainerMapping StorageEntityContainer="web_dbModelStoreContainer" CdmEntityContainer="web_dbEntities">
           <EntitySetMapping Name="Articles">
-            <EntityTypeMapping TypeName="MyWebModel.Article">
-              <MappingFragment StoreEntitySet="Articles">
+            <EntityTypeMapping TypeName="web_dbModel.Article">
+              <MappingFragment StoreEntitySet="Article">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Title" ColumnName="Title" />
                 <ScalarProperty Name="Details" ColumnName="Details" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
-                <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="Display" ColumnName="Display" />
                 <ScalarProperty Name="Author" ColumnName="Author" />
-                <ScalarProperty Name="CreaterGuid" ColumnName="CreaterGuid" />
+                <ScalarProperty Name="CreatorGuid" ColumnName="CreatorGuid" />
                 <ScalarProperty Name="Hits" ColumnName="Hits" />
-                <ScalarProperty Name="Excerpt" ColumnName="Excerpt" />
                 <ScalarProperty Name="Type" ColumnName="Type" />
                 <ScalarProperty Name="isDraft" ColumnName="isDraft" />
                 <ScalarProperty Name="Textlength" ColumnName="Textlength" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="Attachments">
-            <EntityTypeMapping TypeName="MyWebModel.Attachment">
-              <MappingFragment StoreEntitySet="Attachments">
-                <ScalarProperty Name="ID" ColumnName="ID" />
-                <ScalarProperty Name="RefTableID" ColumnName="RefTableID" />
-                <ScalarProperty Name="RefTableName" ColumnName="RefTableName" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="Extension" ColumnName="Extension" />
-                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
-                <ScalarProperty Name="RelativePath" ColumnName="RelativePath" />
-                <ScalarProperty Name="ContentType" ColumnName="ContentType" />
-                <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
-                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="UserInfoes">
-            <EntityTypeMapping TypeName="MyWebModel.UserInfo">
-              <MappingFragment StoreEntitySet="UserInfoes">
+            <EntityTypeMapping TypeName="web_dbModel.UserInfo">
+              <MappingFragment StoreEntitySet="UserInfo">
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="PassWord" ColumnName="PassWord" />
                 <ScalarProperty Name="Gender" ColumnName="Gender" />
                 <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
-                <ScalarProperty Name="CreatDate" ColumnName="CreatDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
                 <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
               </MappingFragment>
             </EntityTypeMapping>

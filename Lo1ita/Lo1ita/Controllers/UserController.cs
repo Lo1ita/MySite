@@ -12,7 +12,7 @@ namespace Lo1ita.Controllers
 {
     public class UserController : Controller
     {
-        private MyWebEntities db = new MyWebEntities();
+        private web_dbEntities db = new web_dbEntities();
 
         // GET: User
         public ActionResult Index()
@@ -46,7 +46,7 @@ namespace Lo1ita.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserGuid,UserName,PassWord,Gender,Birthdate,CreatDate,UpdateDate")] UserInfo userInfo)
+        public ActionResult Create([Bind(Include = "ID,UserGuid,UserName,PassWord,Gender,Birthdate,CreateDate,UpdateDate")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {
@@ -78,7 +78,7 @@ namespace Lo1ita.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,UserGuid,UserName,PassWord,Gender,Birthdate,CreatDate,UpdateDate")] UserInfo userInfo)
+        public ActionResult Edit([Bind(Include = "ID,UserGuid,UserName,PassWord,Gender,Birthdate,CreateDate,UpdateDate")] UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {

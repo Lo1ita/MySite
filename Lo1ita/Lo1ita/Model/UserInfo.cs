@@ -20,7 +20,7 @@ namespace Lo1ita.Model
         public string PassWord { get; set; }
         public Nullable<int> Gender { get; set; }
         public Nullable<System.DateTime> Birthdate { get; set; }
-        public Nullable<System.DateTime> CreatDate { get; set; }
+        public Nullable<System.DateTime> CreateDate { get; set; }
         public Nullable<System.DateTime> UpdateDate { get; set; }
     }
 }

@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="web_dbModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Article">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="nvarchar" MaxLength="50" />
+    <Property Name="Details" Type="text" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="Display" Type="int" />
+    <Property Name="Author" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreatorGuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="Hits" Type="int" />
+    <Property Name="Type" Type="int" />
+    <Property Name="isDraft" Type="int" />
+    <Property Name="Textlength" Type="int" />
+  </EntityType>
+  <!--生成过程中发现错误:
+警告 6002: 表/视图“bds315550368_db.dbo.UserInfo”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+  <EntityType Name="UserInfo">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserGuid" Type="nvarchar" MaxLength="50" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PassWord" Type="nvarchar" MaxLength="50" />
+    <Property Name="Gender" Type="int" />
+    <Property Name="Birthdate" Type="datetime" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="web_dbModelStoreContainer">
+    <EntitySet Name="Article" EntityType="Self.Article" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="UserInfo" EntityType="Self.UserInfo" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [UserInfo].[ID] AS [ID], 
+    [UserInfo].[UserGuid] AS [UserGuid], 
+    [UserInfo].[UserName] AS [UserName], 
+    [UserInfo].[PassWord] AS [PassWord], 
+    [UserInfo].[Gender] AS [Gender], 
+    [UserInfo].[Birthdate] AS [Birthdate], 
+    [UserInfo].[CreateDate] AS [CreateDate], 
+    [UserInfo].[UpdateDate] AS [UpdateDate]
+    FROM [dbo].[UserInfo] AS [UserInfo]</DefiningQuery>
+    </EntitySet>
+  </EntityContainer>
+</Schema>

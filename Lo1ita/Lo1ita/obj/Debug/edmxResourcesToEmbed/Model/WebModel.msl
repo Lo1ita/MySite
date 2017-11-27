@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="web_dbModelStoreContainer" CdmEntityContainer="web_dbEntities">
+    <EntitySetMapping Name="Articles">
+      <EntityTypeMapping TypeName="web_dbModel.Article">
+        <MappingFragment StoreEntitySet="Article">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Details" ColumnName="Details" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="Display" ColumnName="Display" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="CreatorGuid" ColumnName="CreatorGuid" />
+          <ScalarProperty Name="Hits" ColumnName="Hits" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="isDraft" ColumnName="isDraft" />
+          <ScalarProperty Name="Textlength" ColumnName="Textlength" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserInfoes">
+      <EntityTypeMapping TypeName="web_dbModel.UserInfo">
+        <MappingFragment StoreEntitySet="UserInfo">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="PassWord" ColumnName="PassWord" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="Birthdate" ColumnName="Birthdate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
