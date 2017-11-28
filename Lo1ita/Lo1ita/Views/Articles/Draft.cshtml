@@ -47,25 +47,57 @@
     })
     //计算相隔时间
     $(".intervslTime").each(function () {
-        //将上层标签中的title数据分为日期和时间部分
-        var updatetime = $(this).parent().attr("title").split(" ");
-        //将日期部门分割成数组
-        var updateDate = updatetime[0].split("-");
-        var CurrentTime = new Date();
-        //将日期部分重新组装（用于比较相隔日期）
-        var uDate =Date.parse(updateDate[1] + '-' + updateDate[2] + '-' + updateDate[0]);
-        var CDate = Date.parse((CurrentTime.getMonth() + 1) + '-' + CurrentTime.getDate() + '-' + CurrentTime.getFullYear());
-        //相隔天数（86400000是一天的毫秒数）
-        iDays = parseInt(Math.abs(CDate - uDate) / 86400000);
+        var updatetime = $(this).parent().attr("title");
+        var iDays = GetDateDiff(updatetime, "day");
         if (iDays > 0) {
             $(this).text(iDays+"天");
         }
         else {   //如果时间相隔不足一天，计算相隔小时数
-            var updateHour = updatetime[1].split(":");
-
+            var iHour = GetDateDiff(updatetime, "hour");
+            if (iHour > 0) {
+                $(this).text(iHour + "小时");
+            }
+            else {
+                var iMinute = GetDateDiff(updatetime, "minute");
+                if (iMinute > 0) {
+                    $(this).text(iMinute + "分钟");
+                }
+                else {
+                    var iSecond = GetDateDiff(updatetime, "second");
+                    $(this).text(iSecond + "秒");
+                }
+            }
 
         }
     })
+    //计算两段时间的间隔
+    function GetDateDiff(startTime, diffType) {
+        //将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式 
+        startTime = startTime.replace(/\-/g, "/");
+        //将计算间隔类性字符转换为小写
+        diffType = diffType.toLowerCase();
+        var sTime = new Date(startTime);   //开始时间
+        var eTime = new Date();     //结束时间
+        //作为除数的数字
+        var timeType = 1;
+        switch (diffType) {
+            case "second":
+                timeType = 1000;
+                break;
+            case "minute":
+                timeType = 1000 * 60;
+                break;
+            case "hour":
+                timeType = 1000 * 3600;
+                break;
+            case "day":
+                timeType = 1000 * 3600 * 24;
+                break;
+            default:
+                break;
+        }
+        return parseInt((eTime.getTime() - sTime.getTime()) / parseInt(timeType));
+    }
     //删除文章
     function DeleteArticle(ID) {
 
