@@ -10,6 +10,7 @@
     <script src="~/Scripts/jquery-3.2.1.min.js"></script>
     <script src="~/Scripts/bootstrap.min.js"></script>
     <link href="~/Content/Article.css" rel="stylesheet" />
+    
 </head>
 <body>
     <div id="divTop" class="row clearfix">
@@ -56,7 +57,12 @@
     <div class="container">
         @RenderBody()
     </div>
+    <link href="~/Scripts/SweetAlert/sweetalert.css" rel="stylesheet" />
+    <script src="~/Scripts/SweetAlert/sweetalert-dev.js"></script>
+    
+   
     <script>
+
         $(function () {
             $("[data-toggle='tooltip']").tooltip();
         });
