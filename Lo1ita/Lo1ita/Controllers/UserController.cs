@@ -46,7 +46,7 @@ namespace Lo1ita.Controllers
         // 详细信息，请参阅 https://go.microsoft.com/fwlink/?LinkId=317598。
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,UserGuid,UserName,PassWord,Gender,Birthdate,CreateDate,UpdateDate")] UserInfo userInfo)
+        public ActionResult Create(UserInfo userInfo)
         {
             if (ModelState.IsValid)
             {

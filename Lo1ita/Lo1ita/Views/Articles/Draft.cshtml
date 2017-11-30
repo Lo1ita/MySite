@@ -15,7 +15,15 @@
                             {
                 <li class="Drafts-item">
                     <div class="Drafts-title">
-                        <a class="Drafts-link" href="Edit/@item.ID">@item.Title</a>
+                        @if (string.IsNullOrEmpty(item.Title))
+                        {
+                            <a class="Drafts-link" href="Edit/@item.ID">无标题</a>
+                        }
+                        else
+                        {
+                            <a class="Drafts-link" href="Edit/@item.ID">@item.Title</a>
+                        }
+                        
                     </div>
                     <div class="Drafts-meta">
                         <time class="Drafts-updated" data-toggle="tooltip" data-placement="bottom" title="@item.UpdateDate.ToString()"><span class="intervslTime"></span>前</time>

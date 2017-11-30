@@ -31,14 +31,16 @@
     $(function () {
         $("#btnCreate").hide();
     })
-    var inputText = "";
-    var inputHtml = "";
+    var inputText = ""
+    var inputHtml = ""
     var E = window.wangEditor
     var editor = new E('#divTool', '#divText')
+    editor.customConfig.onchangeTimeout = 3000   //三秒无任何操作，触发onchange事件
     editor.customConfig.onchange = function (html) {
         //编辑器中的文本
         inputText = editor.txt.text();
         inputHtml = editor.txt.html();
+        //如果标题和文章都不为空，发布按钮才有效
         if ($("#Title").val().length > 0 && inputText.length > 0) {
 
             $("#btnPublish").addClass("publishBtn");
@@ -46,9 +48,10 @@
         }
         else {
             $("#btnPublish").removeClass("publishBtn");
-            $("#btnPublish").attr("disabled","disabled");
+            $("#btnPublish").attr("disabled", "disabled");
         }
-    }
+        SaveDraft(inputHtml);
+    };
     editor.create()
     
     if ($("#Details").val() != "") {
@@ -59,4 +62,22 @@
         $("#Details").val(inputHtml);
         $("form").submit();
     })
+    //保存草稿
+    function SaveDraft(content) {
+        var title = $("#Title").val()
+        var ID = $("#ID").val()
+        var textLength = inputText.length
+        $.ajax({
+            url: "SaveDraft",
+            data: { id: ID, title: title, content: content, length: textLength },
+            type: "POST",
+            datatype: "JSON",
+            async: false,
+            success: function (data) {
+                if (data.id != null) {
+                    $("#ID").val(data.id);
+                }
+            }
+        });
+    }
 </script>
