@@ -35,7 +35,7 @@ namespace Lo1ita.Controllers
             }
             else
             {
-                article.Hits = article.Hits + 1;
+                article.Hits = article.Hits + 1;  //每进入一次详细文章页面，点击数加1
             }
             db.SaveChanges();
             if (article == null)
@@ -107,6 +107,7 @@ namespace Lo1ita.Controllers
         [ValidateInput(false)]
         public ActionResult Edit(Article article)
         {
+            
             article.UpdateDate = DateTime.Now;
             article.isDraft = 0;
             db.Entry(article).State = EntityState.Modified;
@@ -172,12 +173,6 @@ namespace Lo1ita.Controllers
             }
             return ret;
         }
-
-
-
-
-
-
 
         /// <summary>
         /// 删除文章

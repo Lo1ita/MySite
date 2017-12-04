@@ -13,9 +13,11 @@
         foreach (var item in Model)
         {
             <li class="Drafts-item">
-                <div class="Drafts-title">
-                    <a class="Drafts-link" href="Details/@item.ID">@item.Title</a>
-                </div>
+                <a class="Drafts-link" href="Details/@item.ID">
+                    <div class="Drafts-title">
+                        @item.Title
+                    </div>
+                </a>
                 <div class="Drafts-meta">
                     <time class="Drafts-updated" data-toggle="tooltip" data-placement="bottom" title="@item.UpdateDate.ToString()"><span class="intervslTime"></span>前</time>
                     <span class="Bull"></span><span class="Drafts-words">共 @item.Textlength 字</span><span class="Bull"></span>
@@ -101,8 +103,11 @@
     function DeleteConfirm(ID) {
         swal({
             title: "确定删除吗？",
-            text: "你将无法恢复该虚拟文件！",
+            text: "文件将无法恢复！",
             type: "warning",
+            confirmButtonColor: "#0f88eb",
+            cancelButtonText: "取消",
+            confirmButtonText: "确定",
             showCancelButton: true,
             closeOnConfirm: false,
             showLoaderOnConfirm: true,

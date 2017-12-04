@@ -68,7 +68,7 @@
         var ID = $("#ID").val()
         var textLength = inputText.length
         $.ajax({
-            url: "SaveDraft",
+            url: "/Articles/SaveDraft",
             data: { id: ID, title: title, content: content, length: textLength },
             type: "POST",
             datatype: "JSON",
