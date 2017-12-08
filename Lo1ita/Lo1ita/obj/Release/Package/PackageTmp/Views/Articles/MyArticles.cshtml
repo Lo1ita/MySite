@@ -5,21 +5,36 @@
     ViewBag.titleText = "我的文章";
 
 }
+
 <div class="Draft-list">
     <ul>
-
-        @foreach (var item in Model)
+        @if(Model.Count()!=0)
+        {
+        foreach (var item in Model)
+        {
+            <li class="Drafts-item">
+                <a class="Drafts-link" href="Details/@item.ID">
+                    <div class="Drafts-title">
+                        @item.Title
+                    </div>
+                </a>
+                <div class="Drafts-meta">
+                    <time class="Drafts-updated" data-toggle="tooltip" data-placement="bottom" title="@item.UpdateDate.ToString()"><span class="intervslTime"></span>前</time>
+                    <span class="Bull"></span><span class="Drafts-words">共 @item.Textlength 字</span><span class="Bull"></span>
+                    <span onclick="DeleteConfirm(@item.ID)" class="Drafts-removeButton">删除</span>
+                </div>
+            </li>
+            }
+            
+        }
+        else
         {
             <li class="Drafts-item">
                 <div class="Drafts-title">
-                    <a class="Drafts-link" href="Details/@item.ID">@item.Title</a>
-                </div>
-                <div class="Drafts-meta">
-                    <time class="Drafts-updated" data-title="lastEditTime(@item.UpdateDate.ToString()">46 分钟前</time>
-                    <span class="Bull"></span><span class="Drafts-words">共 @item.Textlength 字</span><span class="Bull"></span>
-                    <span onclick="DeleteArticle(@item.ID)" class="Drafts-removeButton">删除</span>
+                    <span class="Drafts-link">暂无文章</span>
                 </div>
             </li>
+
         }
 
     </ul>
@@ -31,14 +46,91 @@
         //隐藏发布按钮
         $("#btnPublish").hide();
     })
+    //计算相隔时间
+    $(".intervslTime").each(function () {
+        var updatetime = $(this).parent().attr("title");
+        var iDays = GetDateDiff(updatetime, "day");
+        if (iDays > 0) {
+            $(this).text(iDays + "天");
+        }
+        else {   //如果时间相隔不足一天，计算相隔小时数
+            var iHour = GetDateDiff(updatetime, "hour");
+            if (iHour > 0) {
+                $(this).text(iHour + "小时");
+            }
+            else {
+                var iMinute = GetDateDiff(updatetime, "minute");
+                if (iMinute > 0) {
+                    $(this).text(iMinute + "分钟");
+                }
+                else {
+                    var iSecond = GetDateDiff(updatetime, "second");
+                    $(this).text(iSecond + "秒");
+                }
+            }
 
-    function lastEditTime(datetime) {
-        var editTime = new Date(datetime);
-        //2017 年 10 月 26 日星期四下午 09 点 49 分
-        return "sssas";
+        }
+    })
+    //计算两段时间的间隔
+    function GetDateDiff(startTime, diffType) {
+        //将xxxx-xx-xx的时间格式，转换为 xxxx/xx/xx的格式
+        startTime = startTime.replace(/\-/g, "/");
+        //将计算间隔类性字符转换为小写
+        diffType = diffType.toLowerCase();
+        var sTime = new Date(startTime);   //开始时间
+        var eTime = new Date();     //结束时间
+        //作为除数的数字
+        var timeType = 1;
+        switch (diffType) {
+            case "second":
+                timeType = 1000;
+                break;
+            case "minute":
+                timeType = 1000 * 60;
+                break;
+            case "hour":
+                timeType = 1000 * 3600;
+                break;
+            case "day":
+                timeType = 1000 * 3600 * 24;
+                break;
+            default:
+                break;
+        }
+        return parseInt((eTime.getTime() - sTime.getTime()) / parseInt(timeType));
     }
-    //删除文章
+    //删除文章确认按钮
+    function DeleteConfirm(ID) {
+        swal({
+            title: "确定删除吗？",
+            text: "文件将无法恢复！",
+            type: "warning",
+            confirmButtonColor: "#0f88eb",
+            cancelButtonText: "取消",
+            confirmButtonText: "确定",
+            showCancelButton: true,
+            closeOnConfirm: false,
+            showLoaderOnConfirm: true,
+        },
+            function () {
+                    DeleteArticle(ID);
+            });
+    }
+    //删除文章AJAX
     function DeleteArticle(ID) {
+        
+        $.ajax({
+            type:"POST",
+            url:"DeleteArticle",
+            data:{articleID:ID},
+            datatype: "json",
+            async:false,
+            success: function (data) {
+                if (data = "success") {
+                    location.reload();
+                }
+            }
 
+        })
     }
 </script>
