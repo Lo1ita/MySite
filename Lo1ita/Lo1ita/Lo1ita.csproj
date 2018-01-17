@@ -152,6 +152,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\VueDemo\Controllers\VueController.cs" />
+    <Compile Include="Areas\VueDemo\VueDemoAreaRegistration.cs" />
     <Compile Include="Common\HttpHelper.cs" />
     <Compile Include="Common\WechatHelper.cs" />
     <Compile Include="Controllers\ArticlesController.cs" />
@@ -237,6 +239,10 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <Content Include="Areas\VueDemo\Views\web.config" />
+    <Content Include="Areas\VueDemo\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\VueDemo\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\VueDemo\Views\Vue\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -288,6 +294,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\VueDemo\Models\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
