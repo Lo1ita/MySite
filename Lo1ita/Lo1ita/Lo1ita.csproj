@@ -243,6 +243,7 @@
     <Content Include="Areas\VueDemo\Views\_ViewStart.cshtml" />
     <Content Include="Areas\VueDemo\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\VueDemo\Views\Vue\Index.cshtml" />
+    <Content Include="Areas\VueDemo\Views\Vue\Instance.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -260,6 +261,7 @@
     <Content Include="Scripts\SweetAlert\sweetalert-dev.js" />
     <Content Include="Scripts\SweetAlert\sweetalert.css" />
     <Content Include="Scripts\SweetAlert\sweetalert.min.js" />
+    <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\WangEditor\wangEditor.js" />
     <Content Include="Scripts\WangEditor\wangEditor.min.js" />
     <Content Include="Web.config">

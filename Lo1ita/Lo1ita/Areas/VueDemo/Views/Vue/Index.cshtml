@@ -2,40 +2,125 @@
 @{
     ViewBag.Title = "Index";
 }
+<style>
+    .title {
+        font-size: 20px;
+        font-weight: 600;
+    }
 
-<div id="app">
+    .app {
+        padding: 20px;
+        border-bottom: solid 1px #d0cbcb
+    }
+
+    .explain {
+        margin: 10px 0;
+        color: #676060;
+        font-size: 17px;
+    }
+
+        .explain .vuefun {
+            color: orangered;
+            font-size: 18px;
+        }
+        .redText{
+            color:red;
+            font-size:18px;
+        }
+    .blueText {
+        color: dodgerblue;
+        font-size: 18px;
+    }
+</style>
+<div class="title">app1</div>
+<div class="app" id="app">
     {{message}}
 </div>
-
-<div id="app-2">
+<div class="title">app2</div>
+<div class="app" id="app-2">
+    <div class="explain">
+        <span class="vuefun">v-bind</span>
+        ：绑定标签属性，例如：v-bind:title="message"
+    </div>
     <span v-bind:title="message">
         鼠标悬停几秒钟查看此处动态绑定的提示信息！
     </span>
+    <p v-bind:class="{blueText:hasError,redText:isActive}">可绑定多个class</p>
+    <p v-bind:class="classObject">绑定一个返回对象的计算属性</p>
+    <button v-on:click="changeclass">切换class</button>
 </div>
-<div id="app-3">
-   v-if : <p v-if="seen">当前可见</p>
+<div class="title">app3</div>
+<div class="app" id="app-3">
+    <div class="explain">
+        <span class="vuefun">v-if</span>
+        ：条件渲染指令，根据其后表达式的bool值进行判断是否渲染该元素，例如：v-if="age>25"
+    </div>
+     <p v-if="seen">当前可见</p>
 </div>
-
-<div id="app-4">
-    v-for:
+<div class="title">app4</div>
+<div class="app" id="app-4">
+    <div class="explain">
+        <span class="vuefun">v-for</span>
+        ：遍历，v-for="item in items", items是数组
+    </div>
     <ol>
         <li v-for="todo in todos">
             {{todo.text}}
         </li>
     </ol>
 </div>
-<div id="app-5">
-    v-on:
+<div class="title">app5</div>
+<div class="app" id="app-5">
+    
+    <div class="explain">
+        <span class="vuefun">v-on</span>
+        ：用于监听指定元素的DOM事件
+    </div>
+    <div class="explain">
+        <span class="vuefun">methods</span>
+        ：组件内方法
+    </div>
+    
     <p>{{message}}</p>
     <button v-on:click="reverseMessage">逆转消息</button>
-</div>
+    <div class="explain">
+        <span class="vuefun">computed</span>
+        ：计算属性,计算属性是基于它们的依赖进行缓存的,如果依赖的对象没有改变，则计算属性不会更新
+    </div>
+    <p>{{reverMessage}}</p>
 
-<div id="app-6">
-    v-model:
-    <p>{{message}}</p>
-    <input v-model="message" />
+    <p>{{fullName}}</p>
 </div>
-<div id="app-7">
+<div class="title">app6</div>
+<div class="app" id="app-6">
+
+   
+    <div class="explain">
+        <span class="vuefun">v-model</span>
+        ：实现表单输入和应用状态之间的双向绑定
+    </div>
+    <p>
+        {{message}}
+    </p>
+    <input v-model="message" />
+    <div class="explain">
+        <span class="vuefun">v-once</span>
+        ：一次性绑定
+    </div>
+    <p v-once>{{message}}</p>
+   
+    <div class="explain">
+        <span class="vuefun">v-html</span>
+        ：输出html
+    </div>
+    <p v-html="message"></p>
+   
+</div>
+<div class="title">app7</div>
+<div class="app" id="app-7">
+    <div class="explain">
+        <span class="vuefun">组件示例</span>
+    </div>
     <ol>
         <todo-item v-for="item in groceryList"
                    v-bind:todo="item"
@@ -43,23 +128,66 @@
         </todo-item>
     </ol>
 </div>
+
+<div class="title">侦听器</div>
+<div class="app" id="watch-example">
+    <div class="explain">
+        <span class="vuefun">watch</span>：当需要在数据变化时执行异步或开销较大的操作时，这个方式是最有用的
+    </div>
+    <p>
+        提出一个问题：
+        <input v-model="question" />
+    </p>
+    <p>{{answer}}</p>
+</div>
+<!-- 因为 AJAX 库和通用工具的生态已经相当丰富，Vue 核心代码没有重复 -->
+<!-- 提供这些功能以保持精简。这也可以让你自由选择自己更熟悉的工具。 -->
+<script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 <script>
     var app = new Vue({
         el: '#app',
         data: {
-            message:'Hello Vue!'
+            message: 'Hello Vue!'
         }
     })
     var app2 = new Vue({
         el: '#app-2',
         data: {
-            message:'页面加载于'+new Date().toLocaleString()
+            message: '页面加载于' + new Date().toLocaleString(),
+            isActive: true,
+            hasError: false,
+            classObject: {
+                redText: false,
+                blueText: true
+            }
+        },
+        methods: {
+            changeclass: function () {
+                if (this.isActive === true)
+                    this.isActive = false
+                else
+                    this.isActive = true
+                if (this.hasError === true)
+                    this.hasError = false
+                else
+                    this.hasError=true
+            },
+         computed: {
+             classObject: function () {
+                 return {
+                     redText: !this.isActive,
+                     blueText:!this.hasError
+                 }
+             }
+            }
+
         }
     })
     var app3 = new Vue({
         el: '#app-3',
         data: {
-            seen:true
+            seen: true
         }
     })
     var app4 = new Vue({
@@ -68,7 +196,7 @@
             todos: [
                 { text: '学习Javascript' },
                 { text: '学习Vue' },
-                {text:'整个牛项目'}
+                { text: '整个牛项目' }
             ]
         }
     })
@@ -76,23 +204,44 @@
     var app5 = new Vue({
         el: '#app-5',
         data: {
-            message:'Hello Vue.js!'
+            message: 'Hello Vue.js!',
+            firstName: 'Foo',
+            lastName:'Bar'
+
         },
         methods: {
             reverseMessage: function () {
                 this.message = this.message.split('').reverse().join('')
             }
+        },
+        computed: {
+            reverMessage:function() {
+
+                 return this.message.split('').reverse().join('')
+               
+            },
+            fullName: {
+                get: function () {
+                    return this.firstName+' '+this.lastName
+                },
+                set: function (newValue) {
+                    var names = newValue.split(' ')
+                    this.firstName = names[0]+' Set中加入的字符'
+                    this.lastName=names[names.length-1]
+                }
+            }
+
         }
     })
     var app6 = new Vue({
         el: '#app-6',
         data: {
-            message:'Hello Vue!'
+            message: 'Hello Vue!'
         }
     })
     Vue.component('todo-item', {
         props: ['todo'],
-        template:'<li>{{todo.text}}</li>'
+        template: '<li>{{todo.text}}</li>'
     })
     var app7 = new Vue({
         el: '#app-7',
@@ -100,8 +249,48 @@
             groceryList: [
                 { id: 0, text: '蔬菜' },
                 { id: 1, text: '奶酪' },
-                {id:2,text:'其他随便吃的东西'}
+                { id: 2, text: '其他随便吃的东西' }
             ]
+        }
+    })
+    var watchExampleVM = new Vue({
+        el: '#watch-example',
+        data: {
+            question: '',
+            answer:'你提出问题后，我会给出一个答案！'
+        },
+        watch: {
+            // 如果 `question` 发生改变，这个函数就会运行
+            question: function (newQuestion, oldQuestion) {
+                this.answer = '正在输入中...'
+                this.getAnswer()
+            }
+        },
+        methods: {
+            // `_.debounce` 是一个通过 Lodash 限制操作频率的函数。
+    // 在这个例子中，我们希望限制访问 yesno.wtf/api 的频率
+    // AJAX 请求直到用户输入完毕才会发出。想要了解更多关于
+    // `_.debounce` 函数 (及其近亲 `_.throttle`) 的知识，
+    // 请参考：https://lodash.com/docs#debounce
+            getAnswer: _.debounce(
+                function () {
+                    if (this.question.indexOf('?') === -1) {
+                        this.answer = '问题一般都包含一个问号哦:-）'
+                        return
+                    }
+                    this.answer = '思考中...'
+                    var vm = this
+                    axios.get('https://yesno.wtf/api')
+                        .then(function (response) {
+                            vm.answer = _.capitalize(response.data.answer)
+                        })
+                        .catch(function (error) {
+                            vm.answer = '抱歉! 不能访问此 API. ' + error
+                        })
+                },
+                 // 这是我们为判定用户停止输入等待的毫秒数
+                500
+            )
         }
     })
 </script>

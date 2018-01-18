@@ -13,5 +13,11 @@ namespace Lo1ita.Areas.VueDemo.Controllers
         {
             return View();
         }
+
+
+        public  ActionResult Instance()
+        {
+            return View();
+        }
     }
 }

@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Instance";
+}
+
+<div id="app">
+    <p>{{obj.foo}}</p>
+    <button v-on:click="obj.foo='baz'">change it</button>
+</div>
+
+<script>
+    var obj = {
+        foo:'bar'
+    }
+    Object.freeze(obj)
+     new Vue({
+        el: '#app',
+        data() {
+            return {
+                obj
+            }
+        },
+        created: function () {
+            console.log('foo is:'+this.obj.foo)
+        }
+    })
+</script>
