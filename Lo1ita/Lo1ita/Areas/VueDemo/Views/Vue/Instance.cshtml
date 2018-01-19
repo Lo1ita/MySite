@@ -1,27 +1,72 @@
-﻿
-@{
-    ViewBag.Title = "Instance";
+﻿@{ 
+    Layout = null;
 }
-
-<div id="app">
-    <p>{{obj.foo}}</p>
-    <button v-on:click="obj.foo='baz'">change it</button>
-</div>
-
-<script>
-    var obj = {
-        foo:'bar'
-    }
-    Object.freeze(obj)
-     new Vue({
-        el: '#app',
-        data() {
-            return {
-                obj
-            }
-        },
-        created: function () {
-            console.log('foo is:'+this.obj.foo)
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>页面蒙板</title>
+    <style>
+        #myModel {
+            position: fixed;
+            top: 0;
+            left: 0;
+            display: none;
+            background-color: rgba(9, 9, 9, 0.63);
+            width: 100%;
+            height: 100%;
+            z-index: 1000;
         }
-    })
-</script>
+
+        .model-content {
+            width: 50%;
+            text-align: center;
+            border-radius: 6px;
+            margin: 342px auto;
+            line-height: 30px;
+            z-index: 10001;
+        }
+        .btnClose {
+            float: left;
+            margin-left: 242px;
+        }
+       
+        .btnHerf{
+float:right;
+margin-right:222px;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        
+        <div id="myModel">  
+            <div class="model-content">
+                
+               
+                   <div>
+                       <img src="~/Areas/VueDemo/test/img/提示.png" />
+                   </div> 
+                
+              
+                    <a class="btnClose" href="javascript:void()" id="closeModel" onclick="closeModel()"><img src="~/Areas/VueDemo/test/img/anniu01.png" /></a>
+            
+              
+                    <a class="btnHerf" href="https://www.baidu.com"><img src="~/Areas/VueDemo/test/img/按钮.png" /></a>
+              
+            </div>
+        </div>
+    </div>
+    <script>
+        window.onload = function () {
+            showModel();
+        }
+        function showModel() {
+            document.getElementById('myModel').style.display = 'block';
+        }
+        function closeModel() {
+            document.getElementById('myModel').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

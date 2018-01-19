@@ -32,6 +32,7 @@
         font-size: 18px;
     }
 </style>
+
 <div class="title">app1</div>
 <div class="app" id="app">
     {{message}}
@@ -48,6 +49,7 @@
     <p v-bind:class="{blueText:hasError,redText:isActive}">可绑定多个class</p>
     <p v-bind:class="classObject">绑定一个返回对象的计算属性</p>
     <button v-on:click="changeclass">切换class</button>
+    <p v-bind:style="styleObject">绑定样式对象</p>
 </div>
 <div class="title">app3</div>
 <div class="app" id="app-3">
@@ -55,7 +57,8 @@
         <span class="vuefun">v-if</span>
         ：条件渲染指令，根据其后表达式的bool值进行判断是否渲染该元素，例如：v-if="age>25"
     </div>
-     <p v-if="seen">当前可见</p>
+     <p v-if="seen">这是第一个</p>
+    <button v-on:click="changeShow">切换显示</button>
 </div>
 <div class="title">app4</div>
 <div class="app" id="app-4">
@@ -68,6 +71,12 @@
             {{todo.text}}
         </li>
     </ol>
+    v-for 还支持一个可选的第二个参数为当前项的索引
+    <ul>
+        <li v-for="(todo,index) in todos">
+           {{parentMessage}}- {{index}} - {{todo.text}}
+        </li>
+    </ul>
 </div>
 <div class="title">app5</div>
 <div class="app" id="app-5">
@@ -145,6 +154,10 @@
 <script src="https://cdn.jsdelivr.net/npm/axios@0.12.0/dist/axios.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lodash@4.13.1/lodash.min.js"></script>
 <script>
+    window.onload = function () {
+        //页面定位到该DIV
+        document.querySelector("#app-4").scrollIntoView();
+    }
     var app = new Vue({
         el: '#app',
         data: {
@@ -155,23 +168,25 @@
         el: '#app-2',
         data: {
             message: '页面加载于' + new Date().toLocaleString(),
+            //绑定class是否显示
             isActive: true,
             hasError: false,
+            //绑定对象class
             classObject: {
                 redText: false,
                 blueText: true
+            },
+            //绑定样式对象
+            styleObject: {
+                color: 'green',
+                fontSize:'13px'
             }
+
         },
         methods: {
             changeclass: function () {
-                if (this.isActive === true)
-                    this.isActive = false
-                else
-                    this.isActive = true
-                if (this.hasError === true)
-                    this.hasError = false
-                else
-                    this.hasError=true
+                this.isActive = this.isActive ? false : true
+                this.hasError = this.hasError ? false : true
             },
          computed: {
              classObject: function () {
@@ -188,11 +203,17 @@
         el: '#app-3',
         data: {
             seen: true
+        },
+        methods: {
+            changeShow: function () {
+               this.seen=this.seen?false:true
+            }
         }
     })
     var app4 = new Vue({
         el: '#app-4',
         data: {
+            parentMessage:'Parent',
             todos: [
                 { text: '学习Javascript' },
                 { text: '学习Vue' },
