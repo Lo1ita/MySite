@@ -57,7 +57,15 @@
         <span class="vuefun">v-if</span>
         ：条件渲染指令，根据其后表达式的bool值进行判断是否渲染该元素，例如：v-if="age>25"
     </div>
-     <p v-if="seen">这是第一个</p>
+     <div v-if="seen">
+         <label>姓名：</label>
+    <input placeholder="请输入姓名"  Key="username-input"/>
+    </div>
+    <div v-else>
+        <label>邮箱：</label>
+        <input placeholder="请输入邮箱" Key="email-input" />
+    </div>
+
     <button v-on:click="changeShow">切换显示</button>
 </div>
 <div class="title">app4</div>
