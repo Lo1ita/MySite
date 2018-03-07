@@ -152,6 +152,8 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\GaoDeMap\Controllers\MapController.cs" />
+    <Compile Include="Areas\GaoDeMap\GaoDeMapAreaRegistration.cs" />
     <Compile Include="Areas\VueDemo\Controllers\VueController.cs" />
     <Compile Include="Areas\VueDemo\VueDemoAreaRegistration.cs" />
     <Compile Include="Common\HttpHelper.cs" />
@@ -250,6 +252,10 @@
     <Content Include="Areas\VueDemo\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\VueDemo\Views\Vue\Index.cshtml" />
     <Content Include="Areas\VueDemo\Views\Vue\Instance.cshtml" />
+    <Content Include="Areas\GaoDeMap\Views\web.config" />
+    <Content Include="Areas\GaoDeMap\Views\_ViewStart.cshtml" />
+    <Content Include="Areas\GaoDeMap\Views\Shared\_Layout.cshtml" />
+    <Content Include="Areas\GaoDeMap\Views\Map\Index.cshtml" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.2.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.2.1.js" />
@@ -302,6 +308,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Areas\GaoDeMap\Models\" />
     <Folder Include="Areas\VueDemo\Models\" />
   </ItemGroup>
   <ItemGroup>
