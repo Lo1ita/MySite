@@ -1,14 +1,18 @@
-﻿@{Layout = null;
-}
+﻿
 <!doctype html>
+<html>
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width">
     <style type="text/css">
-        body, html, #container {
+        body, html {
             height: 100%;
             margin: 0px;
+        }
+        #container{
+            width:100%;
+            height:100%;
         }
     </style>
     <title>快速入门</title>
@@ -16,12 +20,102 @@
 <body>
     <div id="container" tabindex="0"></div>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.4&key=d33feacc8387c706c39b55db996eaebd"></script>
+    <script src="https://webapi.amap.com/js/marker.js"></script>
     <script type="text/javascript">
         var map = new AMap.Map('container',{
             resizeEnable: true,
             zoom: 10,
-            center: [116.480983, 40.0958]
+            center: [121.499766, 31.239338],
+           // mapStyle: 'amap://styles/whitesmoke'//样式URL
         });
+        //标注点
+        var markers = [{
+            "name": "第一个地方",
+            "center": "116.405285,39.904989",
+            "type": 0
+        }, {
+            "name": "第二个地方",
+            "center": "101.778916,36.623178",
+            "type": 1
+        }];
+        for (var i = 0; i < markers.length; i += 1) {
+            var marker;
+            if (markers[i].type === 0) {
+                var icon = new AMap.Icon({
+                    image: 'https://vdata.amap.com/icons/b18/1/2.png',
+                    size: new AMap.Size(24, 24)
+                });
+                marker = new AMap.Marker({
+                    icon: icon,
+                    position: markers[i].center.split(','),
+                    offset: new AMap.Pixel(-12, -12),
+                    zIndex: 101,
+                    title: markers[i].name,
+                    map: map
+                });
+            } else {
+                marker = new AMap.Marker({
+                    position: markers[i].center.split(','),
+                    title: markers[i].name,
+                    map: map
+                });
+            }
+            //markers.push(marker);
+        }
+
+        //在地图上加多边形
+        var polygonpath = [
+            [116.169465, 39.932670],
+            [116.160260, 39.924492],
+            [116.186138, 39.879817],
+            [116.150625, 39.710019],
+            [116.183198, 39.709920],
+            [116.226950, 39.777616],
+            [116.421078, 39.810771],
+            [116.442621, 39.799892],
+            [116.463478, 39.790066],
+            [116.588276, 39.809551],
+            [116.536091, 39.808859],
+            [116.573856, 39.839643],
+            [116.706380, 39.916740],
+            [116.657285, 39.934545],
+            [116.600293, 39.937770],
+            [116.540039, 39.937968],
+            [116.514805, 39.982375],
+            [116.499935, 40.013710],
+            [116.546520, 40.030443],
+            [116.687668, 40.129961],
+            [116.539697, 40.080659],
+            [116.503390, 40.058474],
+            [116.468800, 40.052578]
+        ];
+        //var polygonArr = new Array();//多边形覆盖物节点坐标数组
+        //polygonArr.push([116.403322, 39.920255]);
+        //polygonArr.push([116.410703, 39.897555]);
+        //polygonArr.push([116.402292, 39.892353]);
+        //polygonArr.push([116.389846, 39.891365]);
+        var polygon = new AMap.Polygon({
+            map: map,
+            path: polygonpath,//设置多边形边界路径
+            strokeColor: "#FF33FF", //线颜色
+            strokeOpacity: 0.2, //线透明度
+            strokeWeight: 3,    //线宽
+            fillColor: "#1791fc", //填充色
+            fillOpacity: 0.35//填充透明度
+        });
+    
+        map.setFitView();
+        //map.setFeatures("road");//单一种类要素显示
+        //工具栏
+        AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.MapType'],
+            function () {
+                map.addControl(new AMap.ToolBar());
+
+                map.addControl(new AMap.Scale());
+
+                map.addControl(new AMap.MapType());
+            });
+        
     </script>
 </body>
 </html>
