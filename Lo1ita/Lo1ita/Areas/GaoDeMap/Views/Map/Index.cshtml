@@ -10,17 +10,29 @@
             height: 100%;
             margin: 0px;
         }
-        #container{
-            width:100%;
-            height:100%;
+        #input {
+            width: 320px;
+            line-height: 30px;
+            font-size: 16px;
+        }
+        #search {
+            height: 35px;
+            width: 70px;
+        }
+        #container {
+            width: 400px;
+            height: 500px;
         }
     </style>
     <title>快速入门</title>
 </head>
 <body>
+    <div>
+        <input type="text" id="input" name="input" placeholder="请输入关键词"  value=""/>
+        <button type="button" id="search">搜索</button>
+    </div>
     <div id="container" tabindex="0"></div>
     <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.4.4&key=d33feacc8387c706c39b55db996eaebd"></script>
-    <script src="https://webapi.amap.com/js/marker.js"></script>
     <script type="text/javascript">
         var map = new AMap.Map('container',{
             resizeEnable: true,
@@ -28,66 +40,37 @@
             center: [121.499766, 31.239338],
            // mapStyle: 'amap://styles/whitesmoke'//样式URL
         });
-        //标注点
-        var markers = [{
-            "name": "第一个地方",
-            "center": "116.405285,39.904989",
-            "type": 0
-        }, {
-            "name": "第二个地方",
-            "center": "101.778916,36.623178",
-            "type": 1
-        }];
-        for (var i = 0; i < markers.length; i += 1) {
-            var marker;
-            if (markers[i].type === 0) {
-                var icon = new AMap.Icon({
-                    image: 'https://vdata.amap.com/icons/b18/1/2.png',
-                    size: new AMap.Size(24, 24)
-                });
-                marker = new AMap.Marker({
-                    icon: icon,
-                    position: markers[i].center.split(','),
-                    offset: new AMap.Pixel(-12, -12),
-                    zIndex: 101,
-                    title: markers[i].name,
-                    map: map
-                });
-            } else {
-                marker = new AMap.Marker({
-                    position: markers[i].center.split(','),
-                    title: markers[i].name,
-                    map: map
-                });
-            }
-            //markers.push(marker);
-        }
+        //for (var i = 0; i < markers.length; i += 1) {
+        //    var marker;
+        //    if (markers[i].type === 0) {
+        //        var icon = new AMap.Icon({
+        //            image: 'https://vdata.amap.com/icons/b18/1/2.png',
+        //            size: new AMap.Size(24, 24)
+        //        });
+        //        marker = new AMap.Marker({
+        //            icon: icon,
+        //            position: markers[i].center.split(','),
+        //            offset: new AMap.Pixel(-12, -12),
+        //            zIndex: 101,
+        //            title: markers[i].name,
+        //            map: map
+        //        });
+        //    } else {
+        //        marker = new AMap.Marker({
+        //            position: markers[i].center.split(','),
+        //            title: markers[i].name,
+        //            map: map
+        //        });
+        //    }
+        //}
 
         //在地图上加多边形
         var polygonpath = [
-            [116.169465, 39.932670],
-            [116.160260, 39.924492],
-            [116.186138, 39.879817],
-            [116.150625, 39.710019],
-            [116.183198, 39.709920],
-            [116.226950, 39.777616],
-            [116.421078, 39.810771],
-            [116.442621, 39.799892],
-            [116.463478, 39.790066],
-            [116.588276, 39.809551],
-            [116.536091, 39.808859],
-            [116.573856, 39.839643],
-            [116.706380, 39.916740],
-            [116.657285, 39.934545],
-            [116.600293, 39.937770],
-            [116.540039, 39.937968],
-            [116.514805, 39.982375],
-            [116.499935, 40.013710],
-            [116.546520, 40.030443],
-            [116.687668, 40.129961],
-            [116.539697, 40.080659],
-            [116.503390, 40.058474],
-            [116.468800, 40.052578]
+            [121.350679, 31.125877],
+            [121.366579, 31.133775],
+            [121.371471, 31.123636],
+            [121.355636, 31.119447]
+            
         ];
         //var polygonArr = new Array();//多边形覆盖物节点坐标数组
         //polygonArr.push([116.403322, 39.920255]);
@@ -105,16 +88,57 @@
         });
     
         map.setFitView();
-        //map.setFeatures("road");//单一种类要素显示
+       
         //工具栏
-        AMap.plugin(['AMap.ToolBar', 'AMap.Scale', 'AMap.MapType'],
-            function () {
-                map.addControl(new AMap.ToolBar());
-
-                map.addControl(new AMap.Scale());
-
-                map.addControl(new AMap.MapType());
+        AMap.plugin(['AMap.Autocomplete', 'AMap.PlaceSearch','AMap.Geocoder'], function () {
+            //var autoOptions = {
+            //    city: "北京", //城市，默认全国
+            //    input: "input"//使用联想输入的input的id
+            //};
+            //autocomplete = new AMap.Autocomplete(autoOptions);
+            //var placeSearch = new AMap.PlaceSearch({
+            //    city: '北京',
+            //    map: map
+            //});
+            var geocoder = new AMap.Geocoder({
+                city: "上海"//城市，默认：“全国”
             });
+            var marker = new AMap.Marker({
+               // map: map,
+                bubble: true
+            })
+            //var button = document.getElementById('search');
+            //button.click = function () {
+               
+            //}
+           
+            //AMap.event.addListener(autocomplete, "select", function (e) {
+            //    //TODO 针对选中的poi实现自己的功能
+            //    placeSearch.setCity(e.poi.adcode);
+            //    placeSearch.search(e.poi.name)
+            //});
+            AMap.event.addDomListener(document.getElementById('search'), 'click', function () {
+                var address = document.getElementById('input').value;
+                geocoder.getLocation(address, function (status, result) {
+
+                    if (status == 'complete' && result.geocodes.length) {
+                        marker.setMap(map);
+                        marker.setPosition(result.geocodes[0].location);
+
+                        var isIN = polygon.contains(marker.getPosition());
+                        alert('点是否在多边形内：' + isIN);
+
+                        map.setCenter(marker.getPosition())
+                        map.zoom = 15;
+                        // document.getElementById('message').innerHTML = ''
+                    } else {
+
+                        //document.getElementById('message').innerHTML = '获取位置失败'
+                    }
+                });
+               
+            });
+        });
         
     </script>
 </body>
