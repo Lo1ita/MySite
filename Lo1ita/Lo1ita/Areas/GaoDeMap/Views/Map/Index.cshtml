@@ -64,7 +64,7 @@
         //        });
         //    }
         //}
-       // var PolygonArray = [];
+      var PolygonArray = [];
         //在地图上加多边形
         for (var i = 0; i < mhPark.length; i++) {
             var Polygon= new AMap.Polygon({
@@ -80,9 +80,9 @@
                 var polygonID = this.getExtData()
                 openInfo(polygonID);
                 })
-           
+            PolygonArray.push(Polygon);
         }
-       
+        console.log(PolygonArray);
     
         map.setFitView();
         
@@ -122,9 +122,16 @@
                         marker.setMap(map);
                         marker.setPosition(result.geocodes[0].location);
 
-                        var isIN = polygon.contains(marker.getPosition());
-                        alert('点是否在多边形内：' + isIN);
-
+                        //var isIN = polygon.contains(marker.getPosition());
+                        //alert('点是否在多边形内：' + isIN);
+                        for (var i = 0; i < PolygonArray.length; i++) {
+                            var isIN = PolygonArray[i].contains(marker.getPosition());
+                            if (isIN == true) {
+                                var parkIndex = PolygonArray[i].getExtData();
+                                alert(mhPark[parkIndex].name);
+                            }
+                            
+                        }
                         map.setCenter(marker.getPosition())
                         map.zoom = 15;
                         // document.getElementById('message').innerHTML = ''
